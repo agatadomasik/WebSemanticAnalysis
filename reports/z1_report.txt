@@ -1,0 +1,60 @@
+============================================================
+Z1 — Preprocessing and TF-IDF matrix
+============================================================
+
+Documents number (d):        2610
+Terms number (t):            5827
+Matrix size (t×d):       5827 × 2610
+Number of non-zero values:  489124
+% non-zero:                3.2161%
+% zero (sparsity):        96.7839%
+
+------------------------------------------------------------
+TOP-20 terms according to IDF (rarest/most specific):
+------------------------------------------------------------
+   1. aba                       IDF = 6.2577
+   2. ace                       IDF = 6.0753
+   3. abba                      IDF = 5.9212
+   4. affirm                    IDF = 5.7877
+   5. abandon                   IDF = 5.6699
+   6. accident                  IDF = 5.5645
+   7. aca                       IDF = 5.4692
+   8. absorb                    IDF = 5.3822
+   9. andrea                    IDF = 5.3022
+  10. abid                      IDF = 5.2280
+  11. adjac                     IDF = 5.1591
+  12. accid                     IDF = 5.0945
+  13. alik                      IDF = 5.0339
+  14. accustom                  IDF = 4.9767
+  15. abstract                  IDF = 4.9227
+  16. antimicrobi               IDF = 4.8714
+  17. aliv                      IDF = 4.8226
+  18. adher                     IDF = 4.7761
+  19. arrow                     IDF = 4.7316
+  20. aesthet                   IDF = 4.6891
+
+------------------------------------------------------------
+TOP-20 terms by TF sum (most frequently occurring):
+------------------------------------------------------------
+   1. cours                     TF_sum = 10250.5
+   2. modul                     TF_sum = 10213.5
+   3. msc                       TF_sum = 8274.1
+   4. fee                       TF_sum = 8028.1
+   5. applic                    TF_sum = 7963.5
+   6. research                  TF_sum = 7845.0
+   7. postgradu                 TF_sum = 7415.4
+   8. requir                    TF_sum = 6499.2
+   9. appli                     TF_sum = 6208.3
+  10. career                    TF_sum = 6087.6
+  11. student                   TF_sum = 6045.2
+  12. year                      TF_sum = 5868.9
+  13. school                    TF_sum = 5547.7
+  14. studi                     TF_sum = 5521.5
+  15. data                      TF_sum = 5110.9
+  16. accommod                  TF_sum = 5061.6
+  17. scienc                    TF_sum = 5037.8
+  18. educ                      TF_sum = 4835.3
+  19. visa                      TF_sum = 4811.6
+  20. live                      TF_sum = 4767.6
+
+============================================================

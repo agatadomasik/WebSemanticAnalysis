@@ -1,0 +1,298 @@
+Z3 - Semantic clustering
+
+k= 3   WCSS=2112.86   silhouette=0.0743
+k= 5   WCSS=2028.36   silhouette=0.0772
+k= 7   WCSS=1999.02   silhouette=0.0767
+k=10   WCSS=1893.57   silhouette=0.0969
+k=15   WCSS=1769.58   silhouette=0.1345
+
+Best k = 15
+
+Cluster examples
+
+============================================================
+CLUSTER 0
+https://warwick.ac.uk/about
+https://warwick.ac.uk/news/pressreleases/warwick_success_in
+https://warwick.ac.uk/study/outreach/partnerships/thinkhigher
+
+============================================================
+CLUSTER 1
+https://warwick.ac.uk/study/postgraduate/courses/pgce-secondary-qts-art-design
+https://warwick.ac.uk/study/postgraduate/courses/pgce-secondary-qts-chemistry
+https://warwick.ac.uk/study/postgraduate/courses/pgce-qts-primary
+
+============================================================
+CLUSTER 2
+https://warwick.ac.uk/study/international/countryinformation/europe/kyrgyzstan
+https://warwick.ac.uk/study/international/countryinformation/europe/uzbekistan
+https://warwick.ac.uk/study/international/countryinformation/europe/portugal
+
+============================================================
+CLUSTER 3
+https://warwick.ac.uk/services/ris/news
+https://warwick.ac.uk/research/research-infrastructure
+https://warwick.ac.uk/fac/arts/research
+
+============================================================
+CLUSTER 4
+https://warwick.ac.uk/fac/sci/med/study/cpd/msc-reproductive-science/?amp%3Bgad_campaignid=23200824686&amp%3Bgad_source=1&amp%3Bgbraid=0AAAAAqQEGFG89cZCH1oq4OSjDPzNQQzcr&amp%3Bgclid=CjwKCAjwtIfPBhAzEiwAv9RTJs9J3MG0ElXOdEpCpyWQOXd8cnJpuFSzObnJ4cWuzxH3bdxZIMWkgBoCX6kQAvD_BwE&amp%3Butm_campaign=wms-pg-repsci-uk-26-rh&amp%3Butm_medium=cpc&utm_source=google
+https://warwick.ac.uk/global/news-events
+https://warwick.ac.uk/research/spotlights/digital/news-events
+
+============================================================
+CLUSTER 5
+https://warwick.ac.uk/undergraduate/explore/local-shops
+https://warwick.ac.uk/study/undergraduate/life-at-warwick
+https://warwick.ac.uk/services/library/using/summerbuildingworks
+
+============================================================
+CLUSTER 6
+https://warwick.ac.uk/services/sport/join/cancel
+https://warwick.ac.uk/services/accommodation/staff/faults
+https://warwick.ac.uk/fac/cross_fac/enterprise/contact
+
+============================================================
+CLUSTER 7
+https://warwick.ac.uk/study/degree-apprenticeships/employers/subcontracting
+https://warwick.ac.uk/study/degreeapprenticeships
+https://warwick.ac.uk/fac/sci/eng/degree_apprenticeships/civil_and_infrastructure_engineering
+
+============================================================
+CLUSTER 8
+https://warwick.ac.uk/alumni/alumni-news/quickfire-stories/constanza-alpini-villalba
+https://warwick.ac.uk/services/careers/international/students/prearrival_webinars
+https://warwick.ac.uk/services/careers/applications/interviews
+
+============================================================
+CLUSTER 9
+https://warwick.ac.uk/services/conduct-and-resolution/warwickmediation/conflict
+https://warwick.ac.uk/services/ris/impactinnovation/impact/warwick-scientific-services
+https://warwick.ac.uk/research/rtp/warwick-scientific-services/casestudies/xct
+
+============================================================
+CLUSTER 10
+https://warwick.ac.uk/study/short-courses/pre-sessional-english/faq/visa
+https://warwick.ac.uk/study/undergraduate/apply/gap-year
+https://warwick.ac.uk/study/international/visa/during-your-studies
+
+============================================================
+CLUSTER 11
+https://warwick.ac.uk/study/postgraduate/courses/mphil-phd-theatre-performance-studies
+https://warwick.ac.uk/study/postgraduate/courses/ma-digital-media-culture
+https://warwick.ac.uk/study/postgraduate/courses/mres-translational-biomedical-research
+
+============================================================
+CLUSTER 12
+https://warwick.ac.uk/services/sg
+https://warwick.ac.uk/about/strategy/?location=more_links
+https://warwick.ac.uk/giving/getinvolved/legacies
+
+============================================================
+CLUSTER 13
+https://warwick.ac.uk/study/international/countryinformation/caribbean/montserrat
+https://warwick.ac.uk/study/international/countryinformation/caribbean/jamaica
+https://warwick.ac.uk/study/postgraduate/courses/mphil-phd-caribbean-studies
+
+============================================================
+CLUSTER 14
+https://warwick.ac.uk/study/cll/research/studyroutes
+https://warwick.ac.uk/study/cll/alumni/stories
+https://warwick.ac.uk/study/cll/our-research-new/james-impact-on-community-integration
+
+Cluster terms
+
+============================================================
+Cluster 0
+wmg                  0.1414
+engag                0.1123
+innov                0.1122
+busi                 0.0822
+public               0.0771
+wie                  0.0735
+midland              0.0735
+industri             0.0724
+region               0.0704
+partnership          0.0694
+
+============================================================
+Cluster 1
+pgce                 0.5162
+qts                  0.3863
+secondari            0.2702
+teacher              0.2640
+school               0.1495
+teach                0.1401
+cte                  0.1019
+cours                0.0992
+educ                 0.0980
+placement            0.0947
+
+============================================================
+Cluster 2
+requir               0.2338
+appli                0.1978
+visa                 0.1779
+tuberculosi          0.1489
+guidanc              0.1458
+differenti           0.1439
+immigr               0.1417
+arrang               0.1353
+scholarship          0.1346
+foundat              0.1337
+
+============================================================
+Cluster 3
+research             0.3462
+cultur               0.2147
+ncrc                 0.0860
+impact               0.0799
+project              0.0704
+ref                  0.0650
+collabor             0.0612
+lead                 0.0596
+enhanc               0.0583
+ethic                0.0557
+
+============================================================
+Cluster 4
+scienc               0.1041
+research             0.0996
+health               0.0817
+professor            0.0738
+centr                0.0700
+faculti              0.0698
+news                 0.0679
+school               0.0659
+art                  0.0589
+jun                  0.0545
+
+============================================================
+Cluster 5
+campus               0.1148
+accommod             0.0866
+park                 0.0850
+space                0.0744
+room                 0.0661
+road                 0.0650
+sport                0.0611
+coventri             0.0586
+day                  0.0520
+centr                0.0487
+
+============================================================
+Cluster 6
+isdiscret            0.4066
+readon               0.4066
+hidden               0.3498
+name                 0.2891
+type                 0.2488
+textfieldel          0.1828
+text                 0.1773
+valu                 0.1644
+data                 0.1353
+protect              0.0825
+
+============================================================
+Cluster 7
+apprenticeship       0.6197
+apprentic            0.3449
+levi                 0.1068
+degre                0.0989
+employ               0.0932
+engin                0.0888
+skill                0.0689
+standard             0.0646
+job                  0.0635
+train                0.0554
+
+============================================================
+Cluster 8
+career               0.1265
+alumni               0.1265
+job                  0.0910
+graduat              0.0756
+role                 0.0707
+employ               0.0681
+skill                0.0660
+work                 0.0612
+interview            0.0602
+student              0.0565
+
+============================================================
+Cluster 9
+librari              0.0537
+data                 0.0499
+access               0.0406
+health               0.0379
+servic               0.0367
+collect              0.0339
+request              0.0327
+student              0.0327
+misconduct           0.0315
+sitebuild            0.0310
+
+============================================================
+Cluster 10
+cours                0.1221
+visa                 0.1186
+applic               0.1136
+student              0.0793
+appli                0.0608
+requir               0.0608
+accommod             0.0589
+postgradu            0.0586
+fee                  0.0577
+studi                0.0556
+
+============================================================
+Cluster 11
+modul                0.2626
+fee                  0.1891
+cours                0.1678
+msc                  0.1524
+applic               0.0964
+cost                 0.0951
+tuition              0.0917
+postgradu            0.0884
+appli                0.0801
+requir               0.0794
+
+============================================================
+Cluster 12
+sustain              0.1914
+research             0.0859
+energi               0.0693
+global               0.0626
+environment          0.0588
+collabor             0.0571
+partnership          0.0546
+inclus               0.0541
+strategi             0.0521
+innov                0.0520
+
+============================================================
+Cluster 13
+caribbean            0.4855
+cape                 0.4300
+grade                0.3294
+unit                 0.1822
+exclud               0.1677
+uwi                  0.1624
+requir               0.1335
+studi                0.1273
+subject              0.1263
+appli                0.0975
+
+============================================================
+Cluster 14
+coach                0.2721
+lifelong             0.1663
+career               0.1495
+cours                0.1151
+counsel              0.1112
+learn                0.0988
+childhood            0.0982
+westwood             0.0847
+centr                0.0762
+earli                0.0751

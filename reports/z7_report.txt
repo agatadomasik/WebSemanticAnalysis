@@ -1,0 +1,11 @@
+Z7 — COMPARISON: k-means vs GMM
+============================================================
+
+Model          Silhouette     NMI            ARI            
+------------------------------------------------------------
+k-means        0.0924         0.4083         0.2113         
+GMM            0.0552         0.3256         0.1002         
+
+
+Interpretation:
+GMM allows soft clustering approximation, which can better capture overlapping semantic structures compared to hard k-means assignments.

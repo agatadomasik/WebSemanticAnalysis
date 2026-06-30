@@ -5,6 +5,8 @@ from pathlib import Path
 import numpy as np
 from scipy.sparse import csr_matrix, save_npz
 
+from src.config import TDM_MIN_DF, TDM_MAX_DF_RATIO
+
 ROOT = Path(__file__).parent.parent
 CORPUS_JSON = ROOT / "data" / "processed" / "corpus.json"
 PROCESSED_DIR = ROOT / "data" / "processed"
@@ -15,8 +17,8 @@ TDM_OUT = PROCESSED_DIR / "tdm.npz"
 VOCAB_OUT = PROCESSED_DIR / "vocab.json"
 REPORT_OUT = REPORTS_DIR / "z1_report.txt"
 
-MIN_DF = 5       # the term must appear in at least 5 documents
-MAX_DF_RATIO = 0.95  # the term cannot appear in more than 95% of documents
+MIN_DF = TDM_MIN_DF
+MAX_DF_RATIO = TDM_MAX_DF_RATIO
 
 
 def build_vocabulary(corpus: list[dict]) -> dict[str, int]:

@@ -2,11 +2,12 @@ import json
 from collections import Counter
 from pathlib import Path
 
-import matplotlib.pyplot as plt
 import numpy as np
-from sklearn.metrics import adjusted_rand_score, normalized_mutual_info_score
 from sklearn.preprocessing import normalize
 
+from src.config import KMEANS_KS as KS, BEST_K_FOR_HEATMAP, TOP_COMMUNITIES_FOR_HEATMAP
+from src.metrics import compute_nmi, compute_ari
+from src.comparison_plots import save_agreement_plot, save_confusion_heatmap
 from src.z3_k_means import my_kmeans
 from src.z4_communities import load_graph, detect_communities
 
@@ -17,10 +18,6 @@ REPORTS.mkdir(exist_ok=True)
 
 LSI = PROCESSED / "lsi_documents.npy"
 CORPUS = PROCESSED / "corpus.json"
-
-KS = [3, 5, 7, 10, 15]
-BEST_K_FOR_HEATMAP = 7  # which k to use for the confusion-matrix / case-study sections
-TOP_COMMUNITIES_FOR_HEATMAP = 20  # trim the heatmap to the N largest communities
 
 
 # ---------------------------------------------------------------------------
@@ -55,80 +52,6 @@ def build_alignment(corpus, cluster_labels, communities):
     return common_urls, cluster_vec, community_vec
 
 
-def compute_nmi(u, v):
-    n = len(u)
-
-    # Prawdopodobieństwa przynależności do klastrów i communities
-    counts_u = Counter(u)
-    P_u = {}
-    for i, c in counts_u.items():
-        P_u[i] = c / n
-
-    counts_v = Counter(v)
-    P_v = {}
-    for i, c in counts_v.items():
-        P_v[i] = c / n
-
-    # P(i,j) - rozkład wspólny
-    # zip(labels_u, labels_v) tworzy parę etykiet dla KAŻDEGO dokumentu z osobna,
-    # Counter zlicza, ile razy każda taka para się powtórzyła
-    joint_counts = Counter(zip(u, v))
-    P_uv = {}
-    for pair, c in joint_counts.items():
-        P_uv[pair] = c / n
-
-    I = 0.0
-    for (i, j), p_ij in P_uv.items():
-        I += p_ij * np.log(p_ij / (P_u[i] * P_v[j]))
-
-    # Entropie
-    H_u = -sum(p * np.log(p) for p in P_u.values())
-    H_v = -sum(p * np.log(p) for p in P_v.values())
-
-    # Normalizacja do [0,1]
-    return 2 * I / (H_u + H_v)
-
-from collections import Counter
-from math import comb
-
-
-def compute_ari(u, v):
-    n = len(u)
-    assert n == len(v)
-
-    # tablica kontyngencji: ile dokumentów mają klastery i community
-    contingency = Counter(zip(u, v))
-
-    # sumy po wierszach (rozmiary klastrów w U)
-    counts_u = Counter(u)
-    # sumy po kolumnach (rozmiary communities w V)
-    counts_v = Counter(v)
-
-    # liczba par dokumentów zgodnych "razem-razem" (w tej samej komórce tabeli)
-    sum_comb_c = sum(comb(c, 2) for c in contingency.values())
-
-    # liczba par dokumentów będących razem w tym samym klastrze U
-    sum_comb_a = sum(comb(c, 2) for c in counts_u.values())
-
-    # liczba par dokumentów będących razem w tej samej community V
-    sum_comb_b = sum(comb(c, 2) for c in counts_v.values())
-
-    # wszystkie możliwe pary dokumentów
-    total_pairs = comb(n, 2)
-
-    # oczekiwana liczba zgodnych par przy podziałach losowych
-    expected_index = (sum_comb_a * sum_comb_b) / total_pairs
-
-    # maksymalna możliwa liczba zgodnych par przy podziałach identyczne
-    max_index = 0.5 * (sum_comb_a + sum_comb_b)
-
-    denominator = max_index - expected_index
-    if denominator == 0:
-        return 1.0  # przypadek brzegowy - oba podziały trywialne (np. 1 grupa)
-
-    ari = (sum_comb_c - expected_index) / denominator
-    return ari
-
 def evaluate_agreement_across_k(documents, corpus, communities) -> list[dict]:
     results = []
 
@@ -151,47 +74,11 @@ def evaluate_agreement_across_k(documents, corpus, communities) -> list[dict]:
     return results
 
 
-def save_agreement_plot(results: list[dict]) -> None:
-    ks = [r["k"] for r in results]
-    nmis = [r["nmi"] for r in results]
-    aris = [r["ari"] for r in results]
-
-    plt.figure(figsize=(8, 5))
-    plt.plot(ks, nmis, marker="o", label="NMI")
-    plt.plot(ks, aris, marker="o", label="ARI")
-    plt.xlabel("k (semantic clusters)")
-    plt.ylabel("Agreement score")
-    plt.title("Semantic vs structural agreement across k")
-    plt.legend()
-    plt.grid(True)
-    plt.tight_layout()
-    plt.savefig(REPORTS / "z5_agreement_vs_k.png")
-    plt.close()
-
-
 def confusion_matrix(cluster_vec, community_vec, n_clusters, n_communities):
     matrix = np.zeros((n_communities, n_clusters), dtype=int)
     for c, k in zip(community_vec, cluster_vec):
         matrix[c, k] += 1
     return matrix
-
-
-def save_confusion_heatmap(matrix: np.ndarray, top_communities: int, path: Path) -> None:
-    """Trim to the N largest communities (by row sum) so the heatmap stays readable."""
-    row_sums = matrix.sum(axis=1)
-    top_idx = np.argsort(row_sums)[::-1][:top_communities]
-    trimmed = matrix[top_idx]
-
-    plt.figure(figsize=(10, 8))
-    plt.imshow(trimmed, aspect="auto", cmap="viridis")
-    plt.colorbar(label="number of documents")
-    plt.xlabel("Semantic cluster (k-means)")
-    plt.ylabel(f"Community (top {top_communities} by size)")
-    plt.yticks(range(len(top_idx)), [f"C{i}" for i in top_idx])
-    plt.title("Communities x semantic clusters")
-    plt.tight_layout()
-    plt.savefig(path)
-    plt.close()
 
 
 # ---------------------------------------------------------------------------
@@ -329,7 +216,7 @@ def main() -> None:
 
     print("\nEvaluating NMI / ARI across different k...")
     agreement_results = evaluate_agreement_across_k(documents, corpus, communities)
-    save_agreement_plot(agreement_results)
+    save_agreement_plot(agreement_results, REPORTS / "z5_agreement_vs_k.png")
 
     print(f"\nBuilding detailed comparison for k={BEST_K_FOR_HEATMAP}...")
     labels, _, _ = my_kmeans(documents, BEST_K_FOR_HEATMAP)

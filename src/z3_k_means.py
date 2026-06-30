@@ -10,6 +10,8 @@ from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
 from sklearn.preprocessing import normalize
 
+from src.config import KMEANS_KS, KMEANS_RANDOM_STATE
+
 ROOT = Path(__file__).resolve().parent.parent
 PROCESSED = ROOT / "data" / "processed"
 REPORTS = ROOT / "reports"
@@ -20,8 +22,8 @@ VOCAB = PROCESSED / "vocab.json"
 CORPUS = PROCESSED / "corpus.json"
 SVD_MODEL = PROCESSED / "svd_model.joblib"
 
-KS = [3, 5, 7, 10, 15]
-RANDOM_STATE = 42
+KS = KMEANS_KS
+RANDOM_STATE = KMEANS_RANDOM_STATE
 
 
 def load_inputs() -> tuple[np.ndarray, list[dict], dict[str, int], object]:

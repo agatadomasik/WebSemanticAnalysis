@@ -13,6 +13,8 @@ from scipy.sparse import load_npz
 from sklearn.decomposition import TruncatedSVD
 import joblib
 
+from src.config import SVD_N_COMPONENTS, SVD_VARIANCE_KS
+
 # Configuration
 ROOT = Path(__file__).parent.parent
 PROCESSED = ROOT / "data" / "processed"
@@ -23,8 +25,8 @@ CORPUS = PROCESSED / "corpus.json"
 VARIANCE_REPORT = REPORTS / "z2_variance_analysis.txt"
 LSI_DOCUMENTS = PROCESSED / "lsi_documents.npy"
 
-KS = [10, 20, 50, 100, 200]
-MAX_K = max(KS)
+KS = SVD_VARIANCE_KS
+MAX_K = SVD_N_COMPONENTS
 
 
 def load_data():

@@ -13,14 +13,13 @@ for resource in ["stopwords", "punkt", "punkt_tab"]:
     except LookupError:
         nltk.download(resource, quiet=True)
 
+from src.config import MIN_TOKENS, MIN_TOKEN_LEN
+
 ROOT = Path(__file__).parent.parent
 INDEX_JSON = ROOT / "data" / "raw" / "index.json"
 PROCESSED_DIR = ROOT / "data" / "processed"
 PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
 CORPUS_OUT = PROCESSED_DIR / "corpus.json"
-
-MIN_TOKENS = 50
-MIN_TOKEN_LEN = 3
 
 STOP_WORDS = set(stopwords.words("english"))
 

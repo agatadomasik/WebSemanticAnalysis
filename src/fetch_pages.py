@@ -4,13 +4,15 @@ import hashlib
 import requests
 from pathlib import Path
 
+from src.config import CRAWL_DELAY, CRAWL_TIMEOUT, CRAWL_MAX_PAGES
+
 ROOT = Path(__file__).parent.parent
 GRAPH_JSON = ROOT / "data" / "raw" / "graph.json"
 PAGES_DIR = ROOT / "data" / "raw" / "pages"
 
-DELAY = 0.5          # politeness
-TIMEOUT = 10
-MAX_PAGES = 5000
+DELAY = CRAWL_DELAY
+TIMEOUT = CRAWL_TIMEOUT
+MAX_PAGES = CRAWL_MAX_PAGES
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (compatible; research-crawler/1.0)"
 }

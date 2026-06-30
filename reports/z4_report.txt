@@ -1,0 +1,111 @@
+Z4 - Community detection (Louvain)
+
+Number of communities: 37
+Modularity Q: 0.6098
+Largest community sizes: [1864, 1340, 1282, 889, 820, 812, 774, 769, 761, 713]
+
+============================================================
+COMMUNITY 0 (size=1864)
+  https://warwick.ac.uk/services/vco/execteam/gfd
+  https://warwick.ac.uk/about/60/elena_riva
+  https://warwick.ac.uk/prologo
+  https://warwick.ac.uk/about/strategy/values
+  https://warwick.ac.uk/esports/opening-times
+  https://warwick.ac.uk/sitebuilder2/api/ajax/emailOwner.htm?page=%2Fservices%2Fcareers%2Femployers%2Finternships%2Frecruiting
+  https://warwick.ac.uk/sitebuilder2/api/ajax/emailOwner.htm?page=%2Fservices%2Faccommodation%2Fstudents%2Ffaqs
+  https://warwick.ac.uk/sitebuilder2/api/ajax/emailOwner.htm?page=%2Fabout%2Fteachingandlearning%2Finclusive-education
+  https://warwick.ac.uk/about/60/previous-events/converge-global-illuminations/faqs
+  https://warwick.ac.uk/services/accommodation/staff/offcampus/glossary
+  https://warwick.ac.uk/sitebuilder2/api/ajax/emailOwner.htm?page=%2Fservices%2Faccommodation%2Fprofessional-property-services
+  https://warwick.ac.uk/services/careers/employers/ourservices/fairs/chemistry_health_and_life_sciences
+  https://warwick.ac.uk/fac/cross_fac/enterprise/startup-programme/start-up-advisory-board
+  https://warwick.ac.uk/about/60/calendar/?calendarItem=8ac672c5978255ef019782aeb80a016d
+  https://warwick.ac.uk/giving?location=more_links
+
+Top terms:
+  student              2041
+  work                 1260
+  research             1165
+  use                  1145
+  inform               1109
+  support              1085
+  time                 1064
+  new                  1036
+  know                 1006
+  campus               982
+  perform              981
+  experi               957
+  let                  945
+  advertis             938
+  valu                 925
+
+============================================================
+COMMUNITY 1 (size=1340)
+  https://warwick.ac.uk/fac/cross_fac/wppn/publications/workingpapers
+  https://warwick.ac.uk/fac/cross_fac/iatl/sharingpractice/repository
+  https://warwick.ac.uk/sitebuilder2/api/ajax/emailOwner.htm?page=%2Ffac%2Fsoc%2Fresearch
+  https://warwick.ac.uk/about/strategy/challenges/sscp/news/?newsItem=8ac672c796eba48e0197115fa5044f96
+  https://warwick.ac.uk/departments/cim
+  https://warwick.ac.uk/fac/soc/pais/research/csgr/csgr-people
+  https://warwick.ac.uk/sitebuilder2/api/ajax/emailOwner.htm?page=%2Ffac%2Fcross_fac%2Fiatl
+  https://warwick.ac.uk/fac/cross_fac/iatl/research/present
+  https://warwick.ac.uk/fac/soc/ces/desresearch/rinaed
+  https://warwick.ac.uk/global/monash-warwick-alliance/research/researchfunding/travenchallis
+  https://warwick.ac.uk/fac/soc/ces/desresearch/publications
+  https://warwick.ac.uk/fac/soc/ces/research/dear
+  https://warwick.ac.uk/fac/soc/philosophy/research/researchcentres/wma/current/pastprojects/timebetweenmetaphysicsandpsychology
+  https://warwick.ac.uk/fac/soc/ier/creatinghealthyjobs/meet_the_team
+  https://warwick.ac.uk/fac/cross_fac/iatl/fund/iatlsden
+
+Top terms:
+  research             714
+  centr                393
+  studi                248
+  new                  235
+  work                 230
+  develop              223
+  polici               201
+  intern               198
+  educ                 180
+  perform              174
+  social               172
+  global               171
+  law                  149
+  know                 148
+  health               144
+
+============================================================
+COMMUNITY 2 (size=1282)
+  https://warwick.ac.uk/sitebuilder2/api/ajax/emailOwner.htm?page=%2Fstudy%2Fpostgraduate%2Fcourses%2Fmsc-business-analytics
+  https://warwick.ac.uk/study/postgraduate/courses/pgce-secondary-qts-computer-science/updates
+  https://warwick.ac.uk/study/postgraduate/courses/msc-e-business-management
+  https://warwick.ac.uk/study/postgraduate/courses/mres-phd-business-management
+  https://warwick.ac.uk/study/postgraduate/unibuddy
+  https://warwick.ac.uk/services/dc/schols_fund/scholarships_and_funding/wtmss
+  https://warwick.ac.uk/study/postgraduate/courses/pgce-secondary-qts-drama
+  https://warwick.ac.uk/sitebuilder2/api/ajax/emailOwner.htm?page=%2Fstudy%2Fpostgraduate%2Fcourses%2Fma-international-development
+  https://warwick.ac.uk/study/postgraduate/courses/pgcert-career-development/updates
+  https://warwick.ac.uk/study/postgraduate/courses/msc-medical-biotechnology-business-management/updates
+  https://warwick.ac.uk/study/postgraduate/courses/mphil-phd-italian/updates
+  https://warwick.ac.uk/fac/soc/al/events/seminarseries
+  https://warwick.ac.uk/sitebuilder2/api/ajax/emailOwner.htm?page=%2Fstudy%2Fpostgraduate%2Fcourses%2Fmsc-medical-biotechnology-business-management
+  https://warwick.ac.uk/study/postgraduate/courses/mphil-phd-global-sustainable-development/updates
+  https://warwick.ac.uk/sitebuilder2/api/ajax/emailOwner.htm?page=%2Fstudy%2Fpostgraduate%2Fcourses%2Fmsc-accounting-financial-management
+
+Top terms:
+  cours                7331
+  research             5432
+  time                 4746
+  applic               4724
+  modul                4696
+  fee                  4620
+  student              4397
+  year                 4353
+  postgradu            4058
+  studi                3674
+  appli                3581
+  requir               3170
+  career               3095
+  msc                  3080
+  find                 2943
+

@@ -1,0 +1,318 @@
+Z6 — TABLE: Semantic clusters vs communities
+======================================================================
+
+CLUSTER 0
+Size: 191
+Dominant community: 0
+Consistency: 0.377
+
+Top terms:
+  research             945
+  innov                703
+  engag                693
+  work                 641
+  support              600
+
+Sample URLs:
+  - https://warwick.ac.uk/about
+  - https://warwick.ac.uk/news/pressreleases/warwick_success_in
+  - https://warwick.ac.uk/study/outreach/partnerships/thinkhigher
+  - https://warwick.ac.uk/fac/sci/wmg/study/why-study-in-wmg
+  - https://warwick.ac.uk/news/pressreleases/new-50m-innovation
+
+----------------------------------------------------------------------
+
+CLUSTER 1
+Size: 29
+Dominant community: 2
+Consistency: 0.897
+
+Top terms:
+  pgce                 929
+  school               838
+  cours                833
+  teach                752
+  teacher              695
+
+Sample URLs:
+  - https://warwick.ac.uk/study/postgraduate/courses/pgce-secondary-qts-art-design
+  - https://warwick.ac.uk/study/postgraduate/courses/pgce-secondary-qts-chemistry
+  - https://warwick.ac.uk/study/postgraduate/courses/pgce-qts-primary
+  - https://warwick.ac.uk/study/postgraduate/courses/pgcei-international
+  - https://warwick.ac.uk/study/postgraduate/courses/pgce-primary-education-with-iqts
+
+----------------------------------------------------------------------
+
+CLUSTER 2
+Size: 104
+Dominant community: 8
+Consistency: 0.981
+
+Top terms:
+  pleas                1088
+  inform               1072
+  requir               959
+  student              917
+  appli                869
+
+Sample URLs:
+  - https://warwick.ac.uk/study/international/countryinformation/europe/kyrgyzstan
+  - https://warwick.ac.uk/study/international/countryinformation/europe/uzbekistan
+  - https://warwick.ac.uk/study/international/countryinformation/europe/portugal
+  - https://warwick.ac.uk/study/international/countryinformation/seasia/cambodia
+  - https://warwick.ac.uk/study/international/countryinformation/europe/slovakia
+
+----------------------------------------------------------------------
+
+CLUSTER 3
+Size: 103
+Dominant community: 6
+Consistency: 0.466
+
+Top terms:
+  research             2236
+  cultur               639
+  impact               300
+  support              287
+  perform              228
+
+Sample URLs:
+  - https://warwick.ac.uk/services/ris/news
+  - https://warwick.ac.uk/research/research-infrastructure
+  - https://warwick.ac.uk/fac/arts/research
+  - https://warwick.ac.uk/research/excellence?location=more_links
+  - https://warwick.ac.uk/services/ris/news/?newsItem=8ac672c59b07d9a6019b08dc0f05059f
+
+----------------------------------------------------------------------
+
+CLUSTER 4
+Size: 273
+Dominant community: 1
+Consistency: 0.201
+
+Top terms:
+  research             2179
+  scienc               986
+  studi                850
+  health               840
+  centr                833
+
+Sample URLs:
+  - https://warwick.ac.uk/fac/sci/med/study/cpd/msc-reproductive-science/?amp%3Bgad_campaignid=23200824686&amp%3Bgad_source=1&amp%3Bgbraid=0AAAAAqQEGFG89cZCH1oq4OSjDPzNQQzcr&amp%3Bgclid=CjwKCAjwtIfPBhAzEiwAv9RTJs9J3MG0ElXOdEpCpyWQOXd8cnJpuFSzObnJ4cWuzxH3bdxZIMWkgBoCX6kQAvD_BwE&amp%3Butm_campaign=wms-pg-repsci-uk-26-rh&amp%3Butm_medium=cpc&utm_source=google
+  - https://warwick.ac.uk/global/news-events
+  - https://warwick.ac.uk/research/spotlights/digital/news-events
+  - https://warwick.ac.uk/fac/cross_fac/ias
+  - https://warwick.ac.uk/fac/sci/med/research
+
+----------------------------------------------------------------------
+
+CLUSTER 5
+Size: 259
+Dominant community: 0
+Consistency: 0.282
+
+Top terms:
+  campus               1521
+  student              1145
+  new                  897
+  inform               714
+  time                 682
+
+Sample URLs:
+  - https://warwick.ac.uk/undergraduate/explore/local-shops
+  - https://warwick.ac.uk/study/undergraduate/life-at-warwick
+  - https://warwick.ac.uk/services/library/using/summerbuildingworks
+  - https://warwick.ac.uk/alumni/alumni-news/connections/bastiaan-van-drempt
+  - https://warwick.ac.uk/about/campus-journey/mode-of-travel/buses
+
+----------------------------------------------------------------------
+
+CLUSTER 6
+Size: 53
+Dominant community: 9
+Consistency: 0.245
+
+Top terms:
+  name                 813
+  valu                 762
+  text                 651
+  type                 649
+  isdiscret            635
+
+Sample URLs:
+  - https://warwick.ac.uk/services/sport/join/cancel
+  - https://warwick.ac.uk/services/accommodation/staff/faults
+  - https://warwick.ac.uk/fac/cross_fac/enterprise/contact
+  - https://warwick.ac.uk/alumni/getinvolved/graduation/update-your-details
+  - https://warwick.ac.uk/research/ncrc/joinmaillist
+
+----------------------------------------------------------------------
+
+CLUSTER 7
+Size: 50
+Dominant community: 5
+Consistency: 0.500
+
+Top terms:
+  apprenticeship       719
+  degre                350
+  apprentic            321
+  work                 300
+  learn                260
+
+Sample URLs:
+  - https://warwick.ac.uk/study/degree-apprenticeships/employers/subcontracting
+  - https://warwick.ac.uk/study/degreeapprenticeships
+  - https://warwick.ac.uk/fac/sci/eng/degree_apprenticeships/civil_and_infrastructure_engineering
+  - https://warwick.ac.uk/fac/sci/eng/degree_apprenticeships
+  - https://warwick.ac.uk/about/regional/stories/sabrina
+
+----------------------------------------------------------------------
+
+CLUSTER 8
+Size: 350
+Dominant community: 9
+Consistency: 0.463
+
+Top terms:
+  career               1765
+  student              1566
+  work                 1429
+  alumni               1200
+  experi               1141
+
+Sample URLs:
+  - https://warwick.ac.uk/alumni/alumni-news/quickfire-stories/constanza-alpini-villalba
+  - https://warwick.ac.uk/services/careers/international/students/prearrival_webinars
+  - https://warwick.ac.uk/services/careers/applications/interviews
+  - https://warwick.ac.uk/business/find-new-talent
+  - https://warwick.ac.uk/services/humanresources/workinghere
+
+----------------------------------------------------------------------
+
+CLUSTER 9
+Size: 457
+Dominant community: 0
+Consistency: 0.153
+
+Top terms:
+  student              2730
+  use                  2128
+  inform               1934
+  support              1655
+  data                 1581
+
+Sample URLs:
+  - https://warwick.ac.uk/services/conduct-and-resolution/warwickmediation/conflict
+  - https://warwick.ac.uk/services/ris/impactinnovation/impact/warwick-scientific-services
+  - https://warwick.ac.uk/research/rtp/warwick-scientific-services/casestudies/xct
+  - https://warwick.ac.uk/terms/privacy/cctv
+  - https://warwick.ac.uk/about/contact
+
+----------------------------------------------------------------------
+
+CLUSTER 10
+Size: 225
+Dominant community: 5
+Consistency: 0.244
+
+Top terms:
+  student              4076
+  applic               2906
+  one                  2263
+  live                 1982
+  offer                1894
+
+Sample URLs:
+  - https://warwick.ac.uk/study/short-courses/pre-sessional-english/faq/visa
+  - https://warwick.ac.uk/study/undergraduate/apply/gap-year
+  - https://warwick.ac.uk/study/international/visa/during-your-studies
+  - https://warwick.ac.uk/study/events/faqs
+  - https://warwick.ac.uk/services/wss/funding/fundingyourstudies
+
+----------------------------------------------------------------------
+
+CLUSTER 11
+Size: 258
+Dominant community: 2
+Consistency: 0.891
+
+Top terms:
+  cours                6032
+  research             5363
+  modul                4718
+  time                 4531
+  year                 4267
+
+Sample URLs:
+  - https://warwick.ac.uk/study/postgraduate/courses/mphil-phd-theatre-performance-studies
+  - https://warwick.ac.uk/study/postgraduate/courses/ma-digital-media-culture
+  - https://warwick.ac.uk/study/postgraduate/courses/mres-translational-biomedical-research
+  - https://warwick.ac.uk/study/postgraduate/courses/msc-behavioural-economics
+  - https://warwick.ac.uk/study/postgraduate/courses/mphil-phd-hispanic-studies
+
+----------------------------------------------------------------------
+
+CLUSTER 12
+Size: 169
+Dominant community: 0
+Consistency: 0.225
+
+Top terms:
+  research             929
+  sustain              890
+  student              827
+  new                  508
+  experi               431
+
+Sample URLs:
+  - https://warwick.ac.uk/services/sg
+  - https://warwick.ac.uk/about/strategy/?location=more_links
+  - https://warwick.ac.uk/giving/getinvolved/legacies
+  - https://warwick.ac.uk/about/teachingandlearning
+  - https://warwick.ac.uk/research/priorities/sustainable-coventry-warwickshire
+
+----------------------------------------------------------------------
+
+CLUSTER 13
+Size: 28
+Dominant community: 8
+Consistency: 0.893
+
+Top terms:
+  studi                397
+  caribbean            289
+  requir               280
+  inform               263
+  grade                251
+
+Sample URLs:
+  - https://warwick.ac.uk/study/international/countryinformation/caribbean/montserrat
+  - https://warwick.ac.uk/study/international/countryinformation/caribbean/jamaica
+  - https://warwick.ac.uk/study/postgraduate/courses/mphil-phd-caribbean-studies
+  - https://warwick.ac.uk/study/international/countryinformation/latinamerica/belize
+  - https://warwick.ac.uk/study/international/countryinformation/caribbean/bvi
+
+----------------------------------------------------------------------
+
+CLUSTER 14
+Size: 61
+Dominant community: 18
+Consistency: 0.836
+
+Top terms:
+  cours                473
+  learn                435
+  coach                367
+  student              358
+  career               349
+
+Sample URLs:
+  - https://warwick.ac.uk/study/cll/research/studyroutes
+  - https://warwick.ac.uk/study/cll/alumni/stories
+  - https://warwick.ac.uk/study/cll/our-research-new/james-impact-on-community-integration
+  - https://warwick.ac.uk/insite/grow
+  - https://warwick.ac.uk/study/cll/our-research/gill-frigerio-calling
+
+----------------------------------------------------------------------
+

@@ -30,7 +30,6 @@
         p {
             margin: 1rem;
         }
-        /* Sidebar Navigation */
         nav {
             width: 280px;
             height: 100vh;
@@ -66,12 +65,10 @@
             color: var(--accent);
         }
         
-        /* Main Content */
         main {
             margin-left: 280px;
             margin-right: 280px;
             padding: 3rem 4rem;
-            /* max-width: 1000px; */
             width: 100%;
         }
         
@@ -114,7 +111,6 @@
             font-size: 1.5rem;
         }
         
-        /* Documentation Grid (Orientacja, Projekt, etc.) */
         .doc-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -142,12 +138,10 @@
             font-size: 0.95rem;
             color: var(--text-muted);
         }
-        /* Styl sprawiający, że trzeci element zajmuje oba bloki szerokości */
         .doc-item.full-width {
             grid-column: 1 / -1;
         }
         
-        /* Result blocks placeholders */
         .result-box {
             background: #f8f9fa;
             border: 1px dashed #ccc;
@@ -183,6 +177,75 @@
             margin: 1.5rem 0;
             border-radius: 0 var(--radius) var(--radius) 0;
         }
+
+        /* --- Pasek kluczowych liczb pod tytułem --- */
+        .stat-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+        .stat-pill {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            padding: 0.5rem 1.1rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        .stat-pill b {
+            color: var(--accent);
+            font-size: 1rem;
+        }
+
+        /* --- Wynik sekcji: krótki werdykt widoczny bez rozwijania --- */
+        .section-result {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--accent-light);
+            border-radius: var(--radius);
+            padding: 0.9rem 1.3rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            color: #1f4d3a;
+        }
+        .section-result b { color: var(--accent); }
+
+        /* --- TL;DR nad każdym rozwijanym blokiem --- */
+        .tldr {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin: 0 0 0.6rem 0;
+        }
+
+        /* --- Rozwijane szczegóły (Orientacja / Budowa / Walidacja) --- */
+        details.more {
+            margin-top: 0.3rem;
+        }
+        details.more summary {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--accent);
+            cursor: pointer;
+            list-style: none;
+            padding: 0.3rem 0;
+        }
+        details.more summary::-webkit-details-marker { display: none; }
+        details.more summary::before {
+            content: "▸ ";
+        }
+        details.more[open] summary::before {
+            content: "▾ ";
+        }
+        details.more summary:hover { text-decoration: underline; }
+        details.more p {
+            margin: 0.6rem 0 0 0;
+            padding: 0;
+        }
     </style>
 </head>
 <body>
@@ -206,6 +269,13 @@
         <header>
             <h1>Zadanie 2. Analiza semantyczna i strukturalna dokumentów webowych</h1>
             <div class="authors">👤 Agata Domasik | 👤 Mateusz Merda</div>
+            <div class="stat-bar">
+                <div class="stat-pill">TDM: <b>5856 × 2610</b> (1.1% niezerowe)</div>
+                <div class="stat-pill">LSI: <b>k=15</b> komponent (75.5% wariancji przy k=50)</div>
+                <div class="stat-pill">k-means: <b>k=15</b> klastrów, silhouette <b>0.13</b></div>
+                <div class="stat-pill">Louvain: <b>37</b> communities, Q=<b>0.61</b></div>
+                <div class="stat-pill">Zgodność: NMI=<b>0.41</b>, ARI=<b>0.21</b></div>
+            </div>
         </header>
         
         <section id="z1">
@@ -255,15 +325,24 @@
             <div class="doc-grid">
                 <div class="doc-item">
                     <h4>🧭 Orientacja</h4>
-                    <p>AI wyjaśniło, że stemming to sprowadzanie słów do wspólnego rdzenia (stem), żeby różne formy tego samego słowa były traktowane jako jedno. Stop words to słowa tak częste, że nie niosą żadnej informacji. Bez usunięcia dominowałyby macierz. Po usunięciu tagów HTML i stop words dokument musi mieć przynajmniej 50 tokenów, żeby trafić do macierzy. Chroni przed stronami typu "404 Not Found" albo samą nawigacją. TF-IDF to sposób na nadanie słowom wag.TF (Term Frequency) - Jak często słowo występuje w tym dokumencie? IDF (Inverse Document Frequency) - Jak rzadkie jest to słowo w całym zbiorze dokumentów?</p>
+                    <p class="tldr">Stemming ujednolica formy słów, stop words odfiltrowują szum, próg 50 tokenów odrzuca puste strony, a TF-IDF waży termy wg częstości i rzadkości.</p>
+                    <details class="more"><summary>Rozwiń pełne wyjaśnienie AI</summary>
+                    <p>Stemming sprowadza słowa do wspólnego rdzenia, żeby różne formy tego samego słowa liczyły się jako jedno. Stop words usuwają słowa tak częste, że nie niosą informacji — bez tego zdominowałyby macierz. Próg min. 50 tokenów po usunięciu HTML i stop words odsiewa strony typu "404" czy samą nawigację. TF-IDF waży termy: TF = jak często słowo występuje w danym dokumencie, IDF = jak rzadkie jest ono w całym zbiorze.</p>
+                    </details>
                 </div>
                 <div class="doc-item">
                     <h4>🔨 Budowa</h4>
-                    <p>Proponowana struktura crawler.py wczytuje listę URL-i z graph.json uzyskanego w poprzednim projekcie, ściąga każdą stronę i zapisuje surowy HTML. preprocessing.py przetwarza surowe HTML-e. tdm.py buduje właściwą macierz TF-IDF. Przy pobieraniu HTML'i AI zasugerowało header "Mozilla/5.0 (compatible; research-crawler/1.0)" - To kompromis, zaczyna się od Mozilla/5.0 więc większość serwerów przepuszcza, dodatkowo research-crawler/1.0 żeby być uczciwym, że to crawler badawczy, a nie udawać w 100% że to Firefox. Dla stop words zasugerowało listę polską i angielską - w naszym przypadku niepotrzebne, bo strona brytyjskiego uniwersytetu jest wyłącznie w języku angielskim. Zasugerowało również dodatkowe stopwords - specyficzne dla tej konkretnej strony uniwersytetu np. pojawiające się w stopce “cookies”, “privacy” itp. - sugestia ma logiczne uzasadnienie.</p>
+                    <p class="tldr">Pipeline: crawler.py → preprocessing.py → tdm.py. AI dobrało uczciwy User-Agent crawlera i stop-listy dopasowane do serwisu.</p>
+                    <details class="more"><summary>Rozwiń szczegóły budowy</summary>
+                    <p>Pipeline: crawler.py (pobiera strony z graph.json), preprocessing.py (czyści HTML), tdm.py (buduje macierz TF-IDF). AI zaproponowało User-Agent "Mozilla/5.0 (compatible; research-crawler/1.0)" — kompromis między przepuszczalnością przez serwery a uczciwym oznaczeniem crawlera. Zasugerowało też stop-listę tylko angielską (strona uczelni jest w 100% po angielsku) plus dodatkowe stopwords specyficzne dla serwisu, np. "cookies", "privacy" ze stopki.</p>
+                    </details>
                 </div>
                 <div class="doc-item full-width">
                     <h4>✅ Walidacja</h4>
-                    <p>98.9% zerowych - ok, żaden dokument nie zawiera wszystkich słów ze słownika. Wszystkie 20 termów ma dokładnie ten sam IDF = 6.2577. To oznacza że wszystkie wystąpiły w dokładnie 5 dokumentach (czyli na progu MIN_DF=5): log(2610 / 5) = 6.2577. To nie jest błąd - po prostu alfabetycznie pierwsze termy ze słownika które mają MIN_DF=5 to przypadkowo słowa na "a". Termy same w sobie wyglądają sensownie: abbey, aircraft, airline, afghan - to prawdziwe słowa, nie śmieci HTML. Propozycja: pominięcie słów o tym identycznym IDF, aby słowa były bardziej zróżnicowane. Dodatkowo na liście pojawiły się termy fals (z atrybutów HTML) i chat (z widgetu chatu na stronie), dodaliśmy je do stop words. Przetrwały również termy “tag” i “open”, dodanie ich do stop words nie pomogło. Rozwiązanie: filtrowanie stop words po stemmingu, nie przed.</p>
+                    <p class="tldr">98.9% macierzy jest zerowe — zgodnie z oczekiwaniami. Identyczny IDF dla top 20 termów wyjaśniony progiem MIN_DF=5, a nie błędem.</p>
+                    <details class="more"><summary>Rozwiń pełną walidację</summary>
+                    <p>98.9% zerowych elementów — zgodne z oczekiwaniami, żaden dokument nie zawiera całego słownika. Wszystkie top-20 termów mają identyczny IDF=6.2577, bo wszystkie wystąpiły w dokładnie 5 dokumentach (próg MIN_DF=5): log(2610/5)=6.2577 — to nie błąd, tylko alfabetyczny przypadek (słowa na "a"). Znaleziono też śmieciowe termy: fals (z atrybutów HTML) i chat (z widgetu) — dodane do stop words. "tag" i "open" przetrwały mimo dodania do stop words, bo filtrowanie działo się przed stemmingiem — poprawka: filtrować stop words po stemmingu.</p>
+                    </details>
                 </div>
             </div>
         </section>
@@ -274,7 +353,7 @@
             <div class="result-box">
                 <img src="reports/z2_scree_plot.png" style="width: 100%; border-radius: 8px;">
                 <img src="reports/z2_lsi_documents.png" style="width: 100%; border-radius: 8px;">
-                [Wykres wartości singularnych (scree plot) oraz Wizualizacja 2D w przestrzeni LSI]
+                Wykres wartości singularnych (scree plot) oraz Wizualizacja 2D w przestrzeni LSI
             </div>
             
             <p>Zachowana wariancja dla testowanych <i>k</i>:</p>
@@ -282,22 +361,30 @@
                 <tr><th>k</th><th>10</th><th>20</th><th>50</th><th>100</th><th>200</th></tr>
                 <tr><td>Frakcja wariancji</td><td>57.58%</td><td>65.64%</td><td>75.55%</td><td>82.68%</td><td>88.73%</td></tr>
             </table>
+
+            <div class="section-result"><b>Wynik:</b> scree plot pokazuje wyraźny „łokieć" przy k≈15–20 — od tego miejsca kolejne wymiary dokładają już tylko marginalną wariancję.</div>
             
             <div class="doc-grid">
                 <div class="doc-item">
                     <h4>🧭 Orientacja</h4>
-                    <p>AI wyjaśnił, że SVD (Singular Value Decomposition) wykonuje się, aby zredukować liczbę wymiarów macierzy. Macierz term-document ma ogromną liczbę wymiarów, gdzie większość słów opisuje podobne zagadnienia. SVD próbuje znaleźć ukryte wymiary, które nie odpowiadają żadnym konkretnym słowom, ale opisują wzorce współwystępowania słów w dokumentach.</p>
-                    <p>Aby jeszcze bardziej zmniejszyć koszt obliczeń, wykorzystuje się Truncated SVD, czyli SVD z ograniczoną liczbą ukrytych wymiarów. Zazwyczaj większość informacji zawiera się w małej części wymiarów, a resztę można odrzucić, nie tracąc przy tym zbyt dużo dokładności.</p>
+                    <p class="tldr">SVD redukuje wymiarowość macierzy term-document do ukrytych „tematów"; Truncated SVD robi to samo taniej, zachowując większość informacji.</p>
+                    <details class="more"><summary>Rozwiń pełne wyjaśnienie AI</summary>
+                    <p>SVD redukuje liczbę wymiarów macierzy term-document, znajdując ukryte wymiary opisujące wzorce współwystępowania słów, zamiast pojedynczych termów. Truncated SVD ogranicza liczbę tych wymiarów, bo większość informacji mieści się w niewielkiej ich części — resztę można odrzucić bez dużej straty dokładności.</p>
+                    </details>
                 </div>
                 <div class="doc-item">
                     <h4>🔨 Budowa</h4>
-                    <p>AI zaproponował wykorzystanie biblioteki scikit-learn do wykonania Truncated SVD. Do obliczenia wariancji dla kolejnych wartości k wystarczyły dane z otrzymanego SVD. Zasugerował, aby punkty na wykresie 2D LSI pokolorować według podkatalogu strony. Wygenerowany kod działał poprawnie, ale wymagał uporządkowania na odrębne metody.</p>
+                    <p class="tldr">Truncated SVD ze scikit-learn; punkty na wykresie 2D pokolorowane wg podkatalogu strony.</p>
+                    <details class="more"><summary>Rozwiń szczegóły budowy</summary>
+                    <p>Truncated SVD z scikit-learn; wariancja dla kolejnych k liczona bezpośrednio z wyniku SVD. Punkty na wykresie 2D pokolorowane wg podkatalogu strony — kod wymagał tylko uporządkowania na osobne metody.</p>
+                    </details>
                 </div>
                 <div class="doc-item full-width">
                     <h4>✅ Walidacja</h4>
-                    <p>Analiza wykresu scree plot wskazuje wyraźny punkt załamania (elbow) w okolicach k = 15-20. Oznacza to, że około 15-20 pierwszych składowych SVD zawiera większość informacji semantycznej w danych, a kolejne komponenty wnoszą jedynie marginalny przyrost wariancji. Wskazuje to na stosunkowo niską efektywną wymiarowość korpusu oraz dobrze zorganizowaną strukturę tematyczną dokumentów.</p>
-                    <p>Większość dokumentów tworzy zwarte skupisko w pobliżu środka przestrzeni LSI, co wskazuje na podobieństwo semantyczne stron analizowanej domeny. Jednocześnie widoczne są pojedyncze dokumenty znacznie oddalone od głównej grupy. Stanowią one obserwacje odstające (outliers), prawdopodobnie odpowiadające stronom o specyficznej treści lub znacznie większej objętości tekstu. Ich duże wartości współrzędnych wynikają z silnej projekcji na pierwsze składowe LSI, a nie z „większej ważności” dokumentu.</p>
-                    <p>Sprawdzono, że najważniejsze słowa w pierwszej osi LSI obejmują m.in. „msc”, „durat” oraz „postgradu”, natomiast wśród dokumentów o najwyższych wartościach tej składowej znajduje się np. strona https://warwick.ac.uk/study/postgraduate/courses, czyli strona zawierająca listę kierunków studiów podyplomowych oferowanych przez uczelnię. Strona ta charakteryzuje się dużą objętością tekstu oraz wysoką częstością występowania słów silnie powiązanych z pierwszym wymiarem LSI.</p>
+                    <p class="tldr">Elbow przy k≈15-20; większość dokumentów tworzy zwarte skupisko, z kilkoma naturalnymi outlierami (np. strona z listą studiów podyplomowych).</p>
+                    <details class="more"><summary>Rozwiń pełną walidację</summary>
+                    <p>Elbow przy k≈15-20 wskazuje niską efektywną wymiarowość korpusu i dobrze zorganizowaną strukturę tematyczną. Większość dokumentów tworzy zwarte skupisko blisko środka przestrzeni LSI (podobieństwo semantyczne stron), a pojedyncze outliery to strony o specyficznej treści lub dużej objętości tekstu, silnie rzutowane na pierwsze składowe. Pierwsza oś LSI jest zdominowana przez słowa "msc", "durat", "postgradu" — najwyższą wartość tej składowej ma strona z listą studiów podyplomowych (warwick.ac.uk/study/postgraduate/courses), co potwierdza sensowność interpretacji tego wymiaru.</p>
+                    </details>
                 </div>
             </div>
         </section>
@@ -393,7 +480,7 @@
                         </svg>
                     </div>
                 </div>
-                [Wykresy Elbow (WCSS vs k) oraz Silhouette score vs k]
+                Wykresy Elbow (WCSS vs k) oraz Silhouette score vs k
             </div>
             
             <p><strong>Wybrane k: 15</strong></p>
@@ -405,25 +492,29 @@
                 </ul>
             </div>
             
+            <div class="section-result"><b>Wynik:</b> najlepsze k=15 (najwyższy silhouette ≈0.13, najniższy WCSS), choć krzywa elbow sugeruje, że nawet wyższe k mogłoby dać dalszą poprawę.</div>
+
             <div class="doc-grid">
                 <div class="doc-item">
                     <h4>🧭 Orientacja</h4>
-                    <p>AI wytłumaczył na czym polega algorytm k-means oraz że w naszym przypadku lepiej jest zastosować k-means na znormalizowanych wektorach LSI, ponieważ “normalizacja powoduje, że odległość euklidesowa między wektorami jest równoważna mierze podobieństwa cosinusowego, dzięki czemu uzyskano efekt zbliżony do spherical k-means, zalecanego w analizie danych tekstowych.“ Wyjaśnił też, że spherical k-means polega na dodaniu kroku normalizacji centroidów po każdej iteracji, a przypisanie do klastra odbywa się na podstawie cosine similarity, a nie odległości euklidesowej.</p>
+                    <p class="tldr">k-means uruchomiony na znormalizowanych wektorach LSI, co w praktyce daje efekt zbliżony do spherical k-means — lepszy dla danych tekstowych.</p>
+                    <details class="more"><summary>Rozwiń pełne wyjaśnienie AI</summary>
+                    <p>k-means uruchomiony na znormalizowanych wektorach LSI, bo wtedy odległość euklidesowa staje się równoważna podobieństwu cosinusowemu — efekt zbliżony do spherical k-means, zalecanego dla danych tekstowych. Prawdziwy spherical k-means dodatkowo normalizuje centroidy po każdej iteracji i liczy przypisania wprost przez cosine similarity.</p>
+                    </details>
                 </div>
                 <div class="doc-item" style="border-color: var(--accent); background: var(--accent-light);">
                     <h4>⚡ 🔨 Budowa (Algorytm Rdzeniowy!)</h4>
-                    <p>AI napisał skrypt za wyjątkiem metody wykonującej algorytm k-means i liczącej WCSS, którą sami potem zaimplementowaliśmy. Algorytm działa następująco:
-                        wybierz k losowych początkowych centroidów,
-                        wykonuj pętlę tak długo jak zmiana wartości centroidów jest większa niż ustalona tolerancja lub do maksymalnej liczby iteracji:
-                        dla każdego dokumentu oblicz odległość euklidesową do każdego centroidu i przypisz dokument do najbliższego,
-                        przesuń centroid do średniej punktów jego klastra (“do środka”),
-                        WCSS: dla każdego klastra oblicz sumę kwadratów odległości do centroidu
-                        Następnie AI doradził, jak lepiej wykorzystać operacje na tablicach numpy. Dzięki temu liczba linii kodu znacznie się zmniejszyła. Dodatkowo zasugerował reinicjalizację centroidu w przypadku pustego klastra, co dodaliśmy do implementacji.
-                    </p>
+                    <p class="tldr">Własna implementacja k-means i WCSS (wymagane zadaniem) — losowe centroidy, przypisanie do najbliższego, aktualizacja średniej, reinicjalizacja pustych klastrów.</p>
+                    <details class="more"><summary>Rozwiń kroki algorytmu</summary>
+                    <p>Sami zaimplementowaliśmy rdzeń algorytmu: losowe centroidy startowe → pętla do zbieżności (przypisz każdy dokument do najbliższego centroidu euklidesowo, przesuń centroid do średniej klastra) → WCSS jako suma kwadratów odległości w klastrze. AI doradziło wektoryzację przez numpy (znacznie krótszy kod) i reinicjalizację centroidu przy pustym klastrze.</p>
+                    </details>
                 </div>
                 <div class="doc-item full-width">
                     <h4>✅ Walidacja</h4>
-                    <p>W trakcie walidacji sprawdziliśmy, że użycie metody KMeans z modułu sklearn.cluster daje wyniki zbliżone do naszych. Oznacza to, że implementacja najprawdopodobniej działa poprawnie. Zgodnie z oczekiwaniem, wraz z rosnącym k spada WCSS - dodanie kolejnych klastrów zawsze pozwala lepiej dopasować dane. Silhouette o wartości rzędu 0.07-0.13 jest dość niskim wynikiem, choć spodziewanym w przypadku stron internetowych jednej uczelni. Wiele stron dotyczy podobnych zagadnień, a granice między tematami są płynne. Spośród analizowanych wartości najlepsze wyniki uzyskaliśmy dla k = 15, które zapewnia najwyższą wartość współczynnika silhouette oraz najniższy WCSS. Analiza wykresu elbow wskazuje, że w badanym zakresie nie osiągnięto jeszcze wyraźnego punktu spłaszczenia, a różnica wartości WCSS pomiędzy k = 10 i k = 15 pozostaje znacząca. Oznacza to, że wartość k może być nadal zbyt mała i jej zwiększenie dałoby wyraźną poprawę wyników.</p>
+                    <p class="tldr">Wyniki zgodne ze sklearn KMeans. Silhouette 0.07–0.13 jest niskie, ale oczekiwane dla stron jednej uczelni o płynnych granicach tematycznych.</p>
+                    <details class="more"><summary>Rozwiń pełną walidację</summary>
+                    <p>sklearn KMeans dał zbliżone wyniki do własnej implementacji — prawdopodobnie poprawnej. WCSS spada z rosnącym k (oczekiwane), a silhouette 0.07-0.13 jest niskie, ale typowe dla stron jednej uczelni o płynnych granicach tematów. k=15 dało najlepszy silhouette i najniższy WCSS, ale krzywa elbow nie spłaszczyła się jeszcze wyraźnie — różnica WCSS między k=10 a k=15 wciąż jest znacząca, więc wyższe k mogłoby dać dalszą poprawę.</p>
+                    </details>
                 </div>
             </div>
         </section>
@@ -434,22 +525,30 @@
             
             <div class="result-box">
                 <img src="reports/z4_community_sizes.png" style="width: 100%; border-radius: 8px;">
-                [Wklej: Histogram rozmiarów communities oraz opis Top-3 największych grup]
+                Histogram rozmiarów communities oraz opis Top-3 największych grup
             </div>
             
             <div class="doc-grid">
                 <div class="doc-item">
                     <h4>🧭 Orientacja</h4>
-                    <p>AI wyjaśniło, że community detection to szukanie grup stron, które są ze sobą gęsto połączone - czyli stron, które częściej linkują do siebie nawzajem niż do reszty grafu. Większość algorytmów community detection (np. Louvain) działa na grafach nieskierowanych, więc musimy albo zignorować kierunek krawędzi, albo użyć specjalnego wariantu algorytmu, który rozumie kierunki (directed Louvain). Louvain automatycznie dzieli graf na grupy tak, żeby zmaksymalizować modularity (Q). Modularity Q mówi: "jak bardzo te grupy są lepsze od przypadkowego podziału?" Wartości w okolicach 0.3–0.7 zwykle oznaczają sensowną, wyraźną strukturę grup. Im wyższe Q, tym wyraźniejszy podział na społeczności.</p>
+                    <p class="tldr">Community detection znajduje grupy stron gęsto połączonych linkami. Louvain maksymalizuje modularity Q; Q=0.61 oznacza wyraźną strukturę grup.</p>
+                    <details class="more"><summary>Rozwiń pełne wyjaśnienie AI</summary>
+                    <p>Community detection szuka grup stron gęsto połączonych linkami — takich, które linkują częściej do siebie niż do reszty grafu. Louvain (algorytm nieskierowany, więc kierunek krawędzi trzeba zignorować lub użyć wariantu directed) dzieli graf tak, by zmaksymalizować modularity Q — miarę tego, o ile lepszy jest ten podział od losowego. Q w okolicach 0.3-0.7 oznacza sensowną, wyraźną strukturę grup.</p>
+                    </details>
                 </div>
                 <div class="doc-item">
                     <h4>🔨 Budowa</h4>
-                    <p>Lepiej użyć Louvain. Label propagation jest szybsze, ale ma dwie wady. Jest niedeterministyczny i niestabilny - za każdym uruchomieniem może dać inny podział, czasem skrajnie różny i nie maksymalizuje modularity wprost. AI pomogło zaimplementować analizę zgodnie z wytycznymi - obliczenie Q, liczba communities, Top-3 największe communities zapisane jako plik tekstowy w /reports. Dodatkowo histogram rozmiarów communities jako png.</p>
+                    <p class="tldr">Wybrano Louvain zamiast label propagation, bo ten drugi jest niedeterministyczny i nie maksymalizuje wprost modularity.</p>
+                    <details class="more"><summary>Rozwiń uzasadnienie wyboru</summary>
+                    <p>Label propagation jest szybsze niż Louvain, ale niedeterministyczne (różne uruchomienia dają różne podziały) i nie maksymalizuje modularity wprost — stąd wybór Louvain. Wynik: Q, liczba communities i Top-3 największe zapisane w /reports jako plik tekstowy, plus histogram rozmiarów jako png.</p>
+                    </details>
                 </div>
                 <div class="doc-item full-width">
                     <h4>✅ Walidacja</h4>
-                    <p>Lepiej użyć Louvain. Label propagation jest szybsze, ale ma dwie wady. Jest niedeterministyczny i niestabilny - za każdym uruchomieniem może dać inny podział, czasem skrajnie różny i nie maksymalizuje modularity wprost. AI pomogło zaimplementować analizę zgodnie z wytycznymi - obliczenie Q, liczba communities, Top-3 największe communities zapisane jako plik tekstowy w /reports. Dodatkowo histogram rozmiarów communities jako png.</p>
+                    <p class="tldr">Większość communities ma rozmiar 0-800 dokumentów, z trzema wyraźnymi outlierami — typowy wzorzec kilku hubów tematycznych.</p>
+                    <details class="more"><summary>Rozwiń pełną walidację</summary>
                     <p>Większość community ma rozmiar w przedziale 0-800, a potem trzy wyraźne outliery w prawym ogonie. To częsty wzorzec w grafach webowych: kilka hubów tematycznych.</p>
+                    </details>
                 </div>
             </div>
         </section>
@@ -460,7 +559,7 @@
             <div class="result-box">
                 <img src="reports/z5_agreement_vs_k.png" style="width: 100%; border-radius: 8px;">
                 <img src="reports/z5_confusion.png" style="width: 100%; border-radius: 8px;">
-                [Wklej: Heatmapa macierzy konfuzji (communities vs klastry k-means) oraz Wykres NMI/ARI dla różnych k]
+                Heatmapa macierzy konfuzji (communities vs klastry k-means) oraz Wykres NMI/ARI dla różnych k
             </div>
             
             <p><strong>Analiza przypadków (Huby i anomalie):</strong></p>
@@ -476,25 +575,36 @@ Cluster 3 rozsiany po 27 community — /research/data-science, /departments/a2z,
                 <li><strong>Huby nawigacyjne:</strong> /privacy, /cookies, /accessibility, /copyright, /terms/general - stopień ~3000-3015, wszystkie cluster 4, ale community 0/3/3/6/3 - ten sam temat, różne community. Są to strony linkowane w stopce.</li>
             </ul>
             
+            <div class="section-result"><b>Wynik:</b> zgodność treści i struktury linków rośnie z k (NMI 0.21→0.41, ARI 0.09→0.21), ale nawet przy k=15 pozostaje umiarkowana — tematy i linki pokrywają się częściowo.</div>
+
             <div class="doc-grid">
                 <div class="doc-item">
                     <h4>🧭 Orientacja</h4>
-                    <p>AI wyjaśniło, że NMI to znormalizowane mutual information - mierzy, ile mówi przynależność dokumentu do klastra semantycznego o jego przynależności do community strukturalnej (i odwrotnie).Mutual information I(U;V) porównuje rzeczywistą współwystępowość pary (klaster, community) z tym, czego oczekiwałbyś, gdyby oba podziały były niezależne. Im większa różnica, tym więcej "wspólnej informacji" niosą.</p>
-                    <p>Normalizacja (dzielenie przez entropię obu podziałów) sprowadza wynik do [0,1], niezależnie od liczby grup w każdym podziale — dzięki temu można porównywać 5 klastrów z 37 communities. NMI=0 oznacza podziały niepowiązane, a NMI=1 podziały identyczne. 0.35 to słaby, ale realny związek. Część klastrów tematycznych pokrywa się z community (np. studia podyplomowe), ale duża część dokumentów jest rozmyta po strukturze niezależnie od tematu.</p>
+                    <p class="tldr">NMI mierzy, ile mówi klaster semantyczny o community strukturalnej (i odwrotnie); znormalizowane do [0,1], więc porównuje 5 klastrów z 37 communities.</p>
+                    <details class="more"><summary>Rozwiń pełne wyjaśnienie AI</summary>
+                    <p>NMI (znormalizowane mutual information) mierzy, ile przynależność do klastra semantycznego mówi o przynależności do community strukturalnej, i odwrotnie — im mocniej pary (klaster, community) współwystępują częściej niż przy losowym podziale, tym wyższy wynik. Normalizacja sprowadza go do [0,1] niezależnie od liczby grup, więc można porównać 5 klastrów z 37 communities: 0 = brak związku, 1 = podziały identyczne.</p>
+                    </details>
                 </div>
                 <div class="doc-item" style="border-color: var(--accent); background: var(--accent-light);">
                     <h4>⚡ 🔨 Budowa NMI (Alg. Rdzeniowy!)</h4>
-                    <p>NMI zaimplementowaliśmy samodzielnie według podanego wzoru. Na początku obliczamy osobno prawdopodobieństwa przynależności do poszczególnych klastrów i communities - liczba dokumentów w grupie / liczba wszystkich dokumentów. Następnie obliczamy rozkład wspólny - tworzymy parę etykiet dla każdego dokumentu z osobna, np. dokument nr 5 ma (klaster=2, community=7) -> para (2,7) i  liczymy, ile razy każda taka para się powtórzyła. Obliczamy prawdopodobieństwo par - liczba wystąpień pary / liczba wszystkich dokumentów. Obliczmy I(U;V) - sumujemy po wszystkich parach prawdopodobieństwo wystąpienia pary * log(prawdopodobieństwo wystąpienia pary / prawdopodobieństwo losowego podziału). Ostatnim krokiem jest obliczenie entropii podziałów i zwrócenie wyniku 2 * I / (H_u + H_v). Wyniki porównaliśmy z wynikami funkcji wbudowanej sklearn normalized_mutual_info_score.</p>
+                    <p class="tldr">NMI zaimplementowane samodzielnie wg wzoru (rozkłady, rozkład wspólny, mutual information, entropia) i zweryfikowane wobec sklearn.</p>
+                    <details class="more"><summary>Rozwiń kroki implementacji</summary>
+                    <p>Implementacja wg wzoru: prawdopodobieństwa klastrów i communities (liczność grupy / N) → rozkład wspólny (zliczenie par etykiet (klaster, community) dla każdego dokumentu) → mutual information I(U;V) jako suma po parach z porównaniem do rozkładu niezależnego → wynik = 2·I / (H_u + H_v), gdzie H to entropia podziałów. Zweryfikowane wobec sklearn.normalized_mutual_info_score.</p>
+                    </details>
                 </div>
                 <div class="doc-item">
                     <h4>🔨 Budowa heatmapy</h4>
-                    <p>Budowa jest bardzo prosta - parujemy etykiety każdego dokumentu: jego community c i jego klaster k. Następnie dla każdego dokumentu zwiększamy licznik w odpowiedniej komórce, czyli budujemy histogram 2D: ile dokumentów ma daną kombinację (community, klaster).</p>
+                    <p class="tldr">Histogram 2D par (community, klaster) — po prostu zliczanie dokumentów w każdej kombinacji etykiet.</p>
+                    <details class="more"><summary>Rozwiń szczegóły</summary>
+                    <p>Budowa jest bardzo prosta — parujemy etykiety każdego dokumentu: jego community c i jego klaster k. Następnie dla każdego dokumentu zwiększamy licznik w odpowiedniej komórce, czyli budujemy histogram 2D: ile dokumentów ma daną kombinację (community, klaster).</p>
+                    </details>
                 </div>
                 <div class="doc-item">
                     <h4>✅ Walidacja</h4>
-                    <p>Zauważyliśmy, że zgodność semantyczno-strukturalna rośnie monotonicznie z k: NMI 0.21 - 0.41, ARI 0.09 - 0.21 (k=3 - 15). AI wyjaśniło, że wynika to z rozdzielczości: przy małym k klastry semantyczne są szerokie i muszą obejmować wiele różnych podgrafów strukturalnych naraz; przy wysokim k klastry są węższe i lepiej domykają się w obrębie pojedynczych community. Mimo wzrostu, nawet przy k=15 NMI=0.41 i ARI=0.21 to wartości umiarkowane - treść i struktura linków pokrywają się częściowo, nie systematycznie.</p>
-                    <p>NMI vs ARI: ARI jest systematycznie niższe niż NMI (0.09 vs 0.21 przy k=3; 0.21 vs 0.41 przy k=15). To efekt tego, że ARI liczy zgodność parami dokumentów, a nasz podział ma jedną dominującą, nieproporcjonalnie dużą grupę (community 0, ~1864 węzłów) - liczba par wewnątrz dużej grupy rośnie kwadratowo, więc ARI mocno karze za to, że ta jedna duża community rozprasza się po wielu klastrach semantycznych. NMI jest mniej wrażliwe na ten nierównomierny rozkład rozmiarów, bo opiera się na entropii/rozkładach prawdopodobieństwa, nie na parach. Dla tego zbioru NMI jest więc bardziej miarodajne jako ogólny wskaźnik zgodności.</p>
-                    <p>Wartości rzędu 0.2-0.4 są typowe dla porównań semantyka-vs-struktura-linków na serwisach webowych, gdzie nawigacja (stopka, menu) tworzy gęste połączenia niezależne od treści.</p>
+                    <p class="tldr">NMI/ARI rosną z k, ale ARI jest systematycznie niższe — to skutek jednej dominującej, nieproporcjonalnie dużej community, którą ARI mocniej karze.</p>
+                    <details class="more"><summary>Rozwiń pełną walidację</summary>
+                    <p>Zgodność rośnie monotonicznie z k (NMI 0.21→0.41, ARI 0.09→0.21), bo przy większym k klastry są węższe i lepiej domykają się w pojedynczych community. ARI jest systematycznie niższe niż NMI, bo liczy zgodność parami dokumentów, a jedna nieproporcjonalnie duża community (~1864 węzłów) mocno je za to karze; NMI, oparte na entropii, jest mniej wrażliwe na ten nierówny rozkład rozmiarów i dla tego zbioru jest bardziej miarodajne. Wartości 0.2-0.4 są zresztą typowe dla serwisów webowych, gdzie nawigacja (stopka, menu) tworzy gęste linki niezależne od treści.</p>
+                    </details>
                 </div>
             </div>
         </section>
@@ -503,14 +613,15 @@ Cluster 3 rozsiany po 27 community — /research/data-science, /departments/a2z,
             <h2>Z6. Wizualizacja i podsumowanie</h2>
             <div class="result-box">
                 <img src="reports/oba grafy.png" style="width: 100%; border-radius: 8px;">
-                [Wklej: Grafy NetworkX/Gephi oraz Chmury Słów (Word Clouds)]
+                Grafy NetworkX/Gephi oraz Chmury Słów (Word Clouds)
             </div>
             <div class="doc-grid">
                 <div class="doc-item" style="grid-column: span 2;">
                     <h4>🔨 Budowa i ✅ Walidacja</h4>
-                    <p>AI pomogło z kodem do wygenerowania grafik przy użyciu matplotlib oraz wordcloud. Pierwsze wersje grafów zawierały wierzchołki niezawarte w TDM, które znacznie zmniejszały czytelność stworzonych grafik. Takie wierzchołki nie podlegały również analizie semantycznej, więc były kompletnie zbędne w analizie porównawczej i należało je usunąć.</p>
-                    <p>Na kolorowanych grafach widać kilka communities, które odpowiadają konkretnym klastrom semantycznym. Stanowią one zbiory blisko powiązanych tematycznie stron, które linkują jedna do drugiej, np. strony powiązane z https://warwick.ac.uk/study/international/ (zgodność z community 0.981). Jednak niektóre klastry są powiązanie nie z jednym, ale z kilkoma communities i przenikają się z innymi klastrami. Jest to związane z tym, że trudno jest przypisać pewne treści do konkretnych tematów, a granice tych tematów są raczej płynne, np. kilka klastrów jest silnie związanych z termem “student”.</p>
-                    <p>Wykres community przedstawia bardzo wyraźnie zarysowane zbiory wierzchołków mocno ze sobą powiązanych. Jest to często spotykane w tego typu witrynach internetowych, gdzie tworzy się swego rodzaju podwitryny związane z określonym tematem lub jednostką administracyjną.</p>
+                    <p class="tldr">Grafy i chmury słów zbudowane w matplotlib/wordcloud, po usunięciu wierzchołków spoza TDM. Niektóre klastry semantyczne dobrze pokrywają się z community (np. 0.981 dla sekcji international), inne przenikają się z powodu płynnych granic tematów.</p>
+                    <details class="more"><summary>Rozwiń pełny opis</summary>
+                    <p>Grafiki w matplotlib i wordcloud. Wierzchołki spoza TDM usunięto — obniżały czytelność i tak nie podlegały analizie semantycznej. Na kolorowanych grafach część communities pokrywa się dobrze z klastrami semantycznymi (np. sekcja study/international/ — zgodność 0.981), ale inne klastry przenikają się z wieloma communities naraz, bo granice tematów są płynne (np. wokół terminu "student"). Wykres community pokazuje wyraźne, mocno powiązane podgrupy — typowe dla serwisów z podwitrynami dla poszczególnych jednostek administracyjnych.</p>
+                    </details>
                 </div>
             </div>
         </section>
@@ -519,14 +630,22 @@ Cluster 3 rozsiany po 27 community — /research/data-science, /departments/a2z,
             <h2>Z7. Metoda dodatkowa (bonus)</h2>
             <p><strong>Wybrana metoda:</strong> [np. pLSA / GMM / Naive Bayes]</p>
             <div class="result-box">[Wyniki wybranej metody w porównaniu z baselinem (LSI + k-means)]</div>
+            <div class="section-result"><b>Wynik:</b> k-means bije GMM zarówno pod względem silhouette, jak i zgodności ze strukturą grafu (NMI, ARI) — przestrzeń LSI jest bardziej separowalna niż nakładająca się.</div>
+
             <div class="doc-grid">
                 <div class="doc-item">
                     <h4>🧭 Orientacja</h4>
-                    <p>AI krótko opisał plusy i minusy wyboru poszczególnych opcji. Zdecydowaliśmy się na GMM, ponieważ jest łatwy do porównania do k-means oraz łatwy w implementacji w Pythonie. W GMM zakładamy, że każdy klaster to rozkład normalny (Gauss) oraz punkt w przestrzeni może należeć do wielu klastrów z różnym prawdopodobieństwem. GMM używa algorytmu Expectation-Maximization (EM), który w każdej iteracji najpierw liczy jakie jest prawdopodobieństwo, że punkt należy do klastra k, a następnie aktualizuje średnie, kowariancje i wagi.</p>
+                    <p class="tldr">Wybrano GMM: łatwe porównanie z k-means, prosta implementacja w Pythonie, przypisanie miękkie (prawdopodobieństwa) zamiast twardego.</p>
+                    <details class="more"><summary>Rozwiń pełne wyjaśnienie AI</summary>
+                    <p>Wybrano GMM (łatwy do porównania z k-means, prosty w implementacji). Każdy klaster to rozkład normalny, a punkt może należeć do wielu klastrów z różnym prawdopodobieństwem. Algorytm EM w każdej iteracji liczy prawdopodobieństwo przynależności punktu do klastra k, a potem aktualizuje średnie, kowariancje i wagi.</p>
+                    </details>
                 </div>
                 <div class="doc-item">
                     <h4>✅ Walidacja</h4>
-                    <p>Uzyskane wyniki wskazują, że w analizowanym zbiorze dokumentów model k-means przewyższa Gaussian Mixture Model zarówno pod względem jakości klastrów (silhouette), jak i zgodności ze strukturą grafu (NMI, ARI). Sugeruje to, że przestrzeń semantyczna LSI ma charakter bardziej separowalny niż nakładający się, co ogranicza przewagę modeli probabilistycznych. W konsekwencji struktura tematyczna serwisu uczelnianego jest bliższa modelowi twardych granic niż mieszanin rozkładów. Powodem może być to, że LSI + TF-IDF już separuje klastry, więc GMM nie ma overlapu do modelowania.</p>
+                    <p class="tldr">k-means przewyższa GMM na obu metrykach — wskazuje to na twarde, dobrze rozdzielone granice tematów zamiast nakładających się rozkładów.</p>
+                    <details class="more"><summary>Rozwiń pełną walidację</summary>
+                    <p>k-means przewyższa GMM zarówno na silhouette, jak i na zgodności ze strukturą grafu (NMI, ARI). Wskazuje to, że przestrzeń LSI jest bardziej separowalna niż nakładająca się — struktura tematyczna serwisu jest bliższa twardym granicom niż mieszaninie rozkładów, bo LSI + TF-IDF już dobrze separuje klastry, więc GMM nie ma czego modelować.</p>
+                    </details>
                 </div>
             </div>
         </section>
@@ -566,7 +685,6 @@ Jeden plik config.py wyeliminowałby potrzebę szukania, gdzie zmienić k.</li>
             const sections = document.querySelectorAll('section');
             const navLinks = document.querySelectorAll('#nav-list a');
             
-            // Podświetlanie menu przy scrollowaniu
             window.addEventListener('scroll', () => {
                 let current = '';
                 sections.forEach(section => {
@@ -585,7 +703,6 @@ Jeden plik config.py wyeliminowałby potrzebę szukania, gdzie zmienić k.</li>
                 });
             });
             
-            // Płynne przewijanie po kliknięciu
             navLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();

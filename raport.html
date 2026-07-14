@@ -183,6 +183,197 @@
             margin: 1.5rem 0;
             border-radius: 0 var(--radius) var(--radius) 0;
         }
+        /* Kontener trzymający obrazki w jednym rzędzie */
+        .image-row {
+            display: flex;
+            gap: 1.5rem; /* Odstęp między obrazkami */
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+        
+        /* Podstawowy wygląd obrazków */
+        .image-row img {
+            width: 48%; /* Zajmują niecałą połowę szerokości kontenera */
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: zoom-in;
+        }
+        
+        /* Efekt po najechaniu myszką */
+        .image-row img:hover {
+            transform: scale(1.4); /* Powiększenie o 40% */
+            z-index: 10; /* Przeniesienie na wierzch */
+            position: relative;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+        }
+        .comparison-container {
+            position: relative;
+            width: 100%;
+            margin: 2rem auto;
+            aspect-ratio: 4 / 3; /* Dopasuj proporcje do swoich grafik (np. 16/9, 4/3) */
+            overflow: hidden;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            user-select: none;
+        }
+        
+        /* Wspólne style dla obu warstw z obrazkami */
+        .comparison-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .comparison-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Gwarantuje, że wykresy nie zostaną zniekształcone */
+            background: var(--bg-card);
+        }
+        
+        /* Górny obrazek, który będzie przycinany suwakiem */
+        .image-overlay {
+            width: 50%; /* Stan początkowy - połowa ekranu */
+            overflow: hidden;
+            z-index: 2;
+        }
+        
+        .image-overlay img {
+            /* Wymuszamy, aby obrazek pod spodem miał zawsze 100% szerokości kontenera-rodzica, 
+            mimo że sam kontener .image-overlay jest zwężany */
+            width: 100%;
+            max-width: none;
+        }
+        
+        /* --- AKUALIZACJA UKRYWANIA NATYWNEGO SUWAKA --- */
+        .comparison-slider {
+            position: absolute;
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            z-index: 5;
+            margin: 0;
+            cursor: ew-resize;
+            top: 0;
+            left: 0;
+        }
+        
+        /* Ukrycie czarnego kwadratu w przeglądarkach Chrome, Safari, Edge, Opera */
+        .comparison-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 40px; /* Szerokość dopasowana do naszego przycisku */
+            height: 100% ; /* Cała wysokość, aby łatwiej było złapać na urządzeniach mobilnych */
+            background: transparent; /* Przezroczysty, ukrywa czarny kwadrat */
+            cursor: ew-resize;
+        }
+        
+        /* Ukrycie czarnego kwadratu w przeglądarce Firefox */
+        .comparison-slider::-moz-range-thumb {
+            width: 40px;
+            height: 100%;
+            background: transparent; /* Przezroczysty, ukrywa czarny kwadrat */
+            border: none;
+            cursor: ew-resize;
+        }
+        
+        .comparison-slider:focus {
+            outline: none;
+        }
+        
+        /* Widzialna linia podziału */
+        .slider-line {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 3px;
+            height: 100%;
+            background: var(--accent);
+            z-index: 3;
+            pointer-events: none;
+            transform: translateX(-50%);
+        }
+        
+        /* Środek suwaka - kółko/uchwyt */
+        .slider-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 36px;
+            height: 36px;
+            background: var(--accent);
+            border: 3px solid #ffffff;
+            border-radius: 50%;
+            z-index: 4;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+        
+        .slider-button::before {
+            content: "◀ ▶";
+            color: #ffffff;
+            font-size: 10px;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: bold;
+        }
+        
+        .image-label {
+            position: absolute;
+            bottom: 10px;
+            padding: 4px 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #ffffff;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.75rem;
+            border-radius: 4px;
+            z-index: 4;
+            pointer-events: none;
+        }
+        .label-left { left: 10px; }
+        .label-right { right: 10px; }
+        
+        /* Kontener dla trzech obrazów w jednym rzędzie */
+        .image-row-three {
+            display: flex;
+            gap: 1rem; /* Odstęp między trzema obrazkami */
+            justify-content: space-between;
+            margin: 1.5rem 0;
+            width: 100%;
+        }
+        
+        /* Wyszukaj i zmodyfikuj tę regułę w stylach */
+        .image-row-three img {
+            width: 32%; /* Każdy obrazek zajmuje około 1/3 szerokości */
+            height: auto;
+            object-fit: contain;
+            border-radius: var(--radius);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            display: block;
+            
+            /* NOWE WŁAŚCIWOŚCI DLA EFEKTU ZOOM */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: zoom-in;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* NOWA REGUŁA: Efekt po najechaniu myszką */
+        .image-row-three img:hover {
+            transform: scale(2);
+            z-index: 10; /* Przeniesienie nad pozostałe dwa obrazki */
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        }
     </style>
 </head>
 <body>
@@ -272,8 +463,10 @@
             <h2>Z2. LSI — redukcja wymiaru (SVD)</h2>
             
             <div class="result-box">
-                <img src="reports/z2_scree_plot.png" style="width: 100%; border-radius: 8px;">
-                <img src="reports/z2_lsi_documents.png" style="width: 100%; border-radius: 8px;">
+                <div class="image-row">
+                    <img src="reports/z2_scree_plot.png" alt="Scree plot LSI">
+                    <img src="reports/z2_lsi_documents.png" alt="Wizualizacja dokumentów LSI">
+                </div>
                 [Wykres wartości singularnych (scree plot) oraz Wizualizacja 2D w przestrzeni LSI]
             </div>
             
@@ -433,8 +626,8 @@
             <p><strong>Użyty algorytm:</strong> Louvain | <strong>Liczba communities:</strong> 37 | <strong>Modularity Q:</strong> 0.61</p>
             
             <div class="result-box">
-                <img src="reports/z4_community_sizes.png" style="width: 100%; border-radius: 8px;">
-                [Wklej: Histogram rozmiarów communities oraz opis Top-3 największych grup]
+                <img src="reports/z4_community_sizes.png" style="padding: 0 8rem; width: 100%; border-radius: 8px;">
+                [Histogram rozmiarów communities oraz opis Top-3 największych grup]
             </div>
             
             <div class="doc-grid">
@@ -458,22 +651,72 @@
             <h2>⚡ Z5. Porównanie: semantyczne vs strukturalne</h2>
             
             <div class="result-box">
-                <img src="reports/z5_agreement_vs_k.png" style="width: 100%; border-radius: 8px;">
-                <img src="reports/z5_confusion.png" style="width: 100%; border-radius: 8px;">
-                [Wklej: Heatmapa macierzy konfuzji (communities vs klastry k-means) oraz Wykres NMI/ARI dla różnych k]
+                <div class="image-row">
+                    <img src="reports/z5_confusion.png">
+                    <img src="reports/z5_agreement_vs_k.png">
+                </div>
+                [Heatmapa macierzy konfuzji (communities vs klastry k-means) oraz Wykres NMI/ARI dla różnych k]
             </div>
             
             <p><strong>Analiza przypadków (Huby i anomalie):</strong></p>
-            <ul style="color: var(--text-muted); margin-left: 2rem;">
-                <li><strong>Zgoda:</strong> Community 2 / Cluster 0 — 276 dok., /study/postgraduate/apply/..., /study/international/admissions/... (rekrutacja).
-Community 9 / Cluster 6 — 170 dok., /alumni/alumni-news/... (newsy absolwentów).
-Community 8 / Cluster 0 — 130 dok., /study/international/countryinformation/... (informacje per kraj, ten sam klaster co C2, inna community - podsekcja tematu).
-</li>
-                <li><strong>Niezgoda:</strong> Cluster 4 rozsiany po 32 community — /about/contact, /accessibility, /library, /study/complaintsprocedure.
-Cluster 1 rozsiany po 27 community — /maps, /about/visiting, /bookshop, /events.
-Cluster 3 rozsiany po 27 community — /research/data-science, /departments/a2z, strona główna.
-</li>
-                <li><strong>Huby nawigacyjne:</strong> /privacy, /cookies, /accessibility, /copyright, /terms/general - stopień ~3000-3015, wszystkie cluster 4, ale community 0/3/3/6/3 - ten sam temat, różne community. Są to strony linkowane w stopce.</li>
+            <ul style="color: var(--text-muted); margin-left: 2rem; list-style-type: none; padding-left: 0;">
+                
+                <li style="margin-bottom: 1.5rem;">
+                    <span style="color: var(--accent); font-weight: bold; font-size: 1.05rem; display: block; margin-bottom: 0.5rem;">🤝 Zgoda (Struktura linków odpowiada treści):</span>
+                    <ul style="list-style-type: disc; margin-left: 1.5rem;">
+                        <li style="margin-bottom: 0.4rem;">
+                            <strong>Community 2 / Cluster 0</strong> (276 dok.) 
+                            <br><small style="color: #888;">Przykłady:</small> <code style="background: #f4f4f4; padding: 2px 6px; border-radius: 4px; font-size: 0.85rem;">/study/postgraduate/apply/...</code>, <code style="background: #f4f4f4; padding: 2px 6px; border-radius: 4px; font-size: 0.85rem;">/study/international/admissions/...</code> 
+                            <br><span style="color: var(--text-main); font-size: 0.9rem;">Interpretacja: Strony ściśle związane z procesem rekrutacji.</span>
+                        </li>
+                        <li style="margin-bottom: 0.4rem;">
+                            <strong>Community 9 / Cluster 6</strong> (170 dok.) 
+                            <br><small style="color: #888;">Przykłady:</small> <code style="background: #f4f4f4; padding: 2px 6px; border-radius: 4px; font-size: 0.85rem;">/alumni/alumni-news/...</code> 
+                            <br><span style="color: var(--text-main); font-size: 0.9rem;">Interpretacja: Aktualności i wiadomości przeznaczone dla absolwentów.</span>
+                        </li>
+                        <li style="margin-bottom: 0.4rem;">
+                            <strong>Community 8 / Cluster 0</strong> (130 dok.) 
+                            <br><small style="color: #888;">Przykłady:</small> <code style="background: #f4f4f4; padding: 2px 6px; border-radius: 4px; font-size: 0.85rem;">/study/international/countryinformation/...</code> 
+                            <br><span style="color: var(--text-main); font-size: 0.9rem;">Interpretacja: Informacje dedykowane konkretnym krajom. Współdzielą ten sam klaster tematyczny co C2, lecz wydzielone zostały do osobnej społeczności (podsekcja strukturalna).</span>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li style="margin-bottom: 1.5rem;">
+                    <span style="color: #b33636; font-weight: bold; font-size: 1.05rem; display: block; margin-bottom: 0.5rem;">⚠️ Niezgoda (Treść rozproszona po strukturze):</span>
+                    <ul style="list-style-type: disc; margin-left: 1.5rem;">
+                        <li style="margin-bottom: 0.4rem;">
+                            <strong>Cluster 4</strong> (Rozsiany po <strong>32</strong> społecznościach)
+                            <br><small style="color: #888;">Przykłady:</small> <code style="background: #fceaea; color: #b33636; padding: 2px 6px; border-radius: 4px; font-size: 0.85rem;">/about/contact</code>, <code style="background: #fceaea; color: #b33636; padding: 2px 6px; border-radius: 4px; font-size: 0.85rem;">/accessibility</code>, <code style="background: #fceaea; color: #b33636; padding: 2px 6px; border-radius: 4px; font-size: 0.85rem;">/library</code>, <code style="background: #fceaea; color: #b33636; padding: 2px 6px; border-radius: 4px; font-size: 0.85rem;">/study/complaintsprocedure</code>
+                        </li>
+                        <li style="margin-bottom: 0.4rem;">
+                            <strong>Cluster 1</strong> (Rozsiany po <strong>27</strong> społecznościach)
+                            <br><small style="color: #888;">Przykłady:</small> <code style="background: #fceaea; color: #b33636; padding: 2px 6px; border-radius: 4px; font-size: 0.85rem;">/maps</code>, <code style="background: #fceaea; color: #b33636; padding: 2px 6px; border-radius: 4px; font-size: 0.85rem;">/about/visiting</code>, <code style="background: #fceaea; color: #b33636; padding: 2px 6px; border-radius: 4px; font-size: 0.85rem;">/bookshop</code>, <code style="background: #fceaea; color: #b33636; padding: 2px 6px; border-radius: 4px; font-size: 0.85rem;">/events</code>
+                        </li>
+                        <li style="margin-bottom: 0.4rem;">
+                            <strong>Cluster 3</strong> (Rozsiany po <strong>27</strong> społecznościach)
+                            <br><small style="color: #888;">Przykłady:</small> <code style="background: #fceaea; color: #b33636; padding: 2px 6px; border-radius: 4px; font-size: 0.85rem;">/research/data-science</code>, <code style="background: #fceaea; color: #b33636; padding: 2px 6px; border-radius: 4px; font-size: 0.85rem;">/departments/a2z</code>, <code style="background: #fceaea; color: #b33636; padding: 2px 6px; border-radius: 4px; font-size: 0.85rem;">strona główna</code>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <span style="color: #c4652a; font-weight: bold; font-size: 1.05rem; display: block; margin-bottom: 0.5rem;">🌐 Huby nawigacyjne (Wysoki stopień wejściowy):</span>
+                    <div style="background: var(--bg-page); border-left: 3px solid #c4652a; padding: 0.8rem 1rem; border-radius: 0 4px 4px 0;">
+                        <p style="margin-bottom: 0.5rem; color: var(--text-main);">
+                            <strong>Podgląd stron:</strong> 
+                            <code style="background: #fdf0e8; color: #c4652a; padding: 2px 6px; border-radius: 4px; font-size: 0.85rem;">/privacy</code>, 
+                            <code style="background: #fdf0e8; color: #c4652a; padding: 2px 6px; border-radius: 4px; font-size: 0.85rem;">/cookies</code>, 
+                            <code style="background: #fdf0e8; color: #c4652a; padding: 2px 6px; border-radius: 4px; font-size: 0.85rem;">/accessibility</code>, 
+                            <code style="background: #fdf0e8; color: #c4652a; padding: 2px 6px; border-radius: 4px; font-size: 0.85rem;">/copyright</code>, 
+                            <code style="background: #fdf0e8; color: #c4652a; padding: 2px 6px; border-radius: 4px; font-size: 0.85rem;">/terms/general</code>
+                        </p>
+                        <p style="font-size: 0.9rem; margin: 0;">
+                            📈 <strong>Metryki:</strong> Stopień węzłów (Degree) <strong style="color: var(--text-main);">~3000–3015</strong>. Wszystkie należą do <strong>Cluster 4</strong>, ale są rozbite na różne społeczności (<strong>0, 3, 6</strong>). 
+                            <br>💡 <strong>Wniosek:</strong> Są to klasyczne strony techniczne linkowane globalnie w stopce każdej podstrony serwisu.
+                        </p>
+                    </div>
+                </li>
             </ul>
             
             <div class="doc-grid">
@@ -502,8 +745,29 @@ Cluster 3 rozsiany po 27 community — /research/data-science, /departments/a2z,
         <section id="z6">
             <h2>Z6. Wizualizacja i podsumowanie</h2>
             <div class="result-box">
-                <img src="reports/oba grafy.png" style="width: 100%; border-radius: 8px;">
-                [Wklej: Grafy NetworkX/Gephi oraz Chmury Słów (Word Clouds)]
+                <div class="comparison-container" id="z6-comparison">
+                    
+                    <div class="comparison-image image-base">
+                        <img src="reports/z6_graph_communities_cropped.png" alt="Graf Communities">
+                        <span class="image-label label-right">Struktura (Communities)</span>
+                    </div>
+                    
+                    <div class="comparison-image image-overlay" id="z6-overlay">
+                        <img src="reports/z6_graph_semantic_cropped.png" alt="Graf Semantyczny" style="width: 100%; max-width: none;">
+                        <span class="image-label label-left">Semantyka (Klastry)</span>
+                    </div>
+                    
+                    <div class="slider-line" id="z6-line"></div>
+                    <div class="slider-button" id="z6-button"></div>
+                    
+                    <input type="range" min="0" max="100" value="50" class="comparison-slider" id="z6-slider">
+                </div>
+                <div class="image-row-three">
+                    <img src="reports/z6_wordcloud_cluster_4.png">
+                    <img src="reports/z6_wordcloud_cluster_8.png">
+                    <img src="reports/z6_wordcloud_cluster_9.png">
+                </div>
+                [Grafy NetworkX oraz Chmury Słów (Word Clouds)]
             </div>
             <div class="doc-grid">
                 <div class="doc-item" style="grid-column: span 2;">
@@ -517,8 +781,37 @@ Cluster 3 rozsiany po 27 community — /research/data-science, /departments/a2z,
         
         <section id="z7">
             <h2>Z7. Metoda dodatkowa (bonus)</h2>
-            <p><strong>Wybrana metoda:</strong> [np. pLSA / GMM / Naive Bayes]</p>
-            <div class="result-box">[Wyniki wybranej metody w porównaniu z baselinem (LSI + k-means)]</div>
+            <p><strong>Wybrana metoda:</strong> GMM</p>
+            <div class="result-box">
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>Model / Metoda</th>
+                            <th style="text-align: right;">Silhouette</th>
+                            <th style="text-align: right;">NMI</th>
+                            <th style="text-align: right;">ARI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background: var(--bg-page);">
+                            <td><strong>k-means</strong> <span style="color: var(--text-muted); font-size: 0.85rem;">(Baseline)</span></td>
+                            <td style="text-align: right; font-weight: bold; color: var(--accent);">0.0924</td>
+                            <td style="text-align: right; font-weight: bold; color: var(--accent);">0.4083</td>
+                            <td style="text-align: right; font-weight: bold; color: var(--accent);">0.2113</td>
+                        </tr>
+                        <tr>
+                            <td><strong>GMM</strong> <span style="color: var(--text-muted); font-size: 0.85rem;">(Gaussian Mixture Models)</span></td>
+                            <td style="text-align: right;">0.0552</td>
+                            <td style="text-align: right;">0.3256</td>
+                            <td style="text-align: right;">0.1002</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="highlight-box" style="margin-top: 1rem;">
+                    <strong>Krótka interpretacja wyników:</strong> Algorytm podstawowy (k-means) osiągnął wyraźnie wyższe wyniki we wszystkich trzech metrykach (Silhouette, NMI oraz ARI) w porównaniu do GMM. Wskazuje to, że w testowanej przestrzeni LSI klastry mają bardziej sferyczny charakter, a twarde przypisanie w k-means lepiej odzwierciedla zarówno strukturę semantyczną dokumentów, jak i ich powiązania linkowe.
+                </div>
+            </div>
             <div class="doc-grid">
                 <div class="doc-item">
                     <h4>🧭 Orientacja</h4>
@@ -533,24 +826,63 @@ Cluster 3 rozsiany po 27 community — /research/data-science, /departments/a2z,
         
         <section id="z8">
             <h2>Z8. Refaktoryzacja i dokumentacja współpracy z AI</h2>
-            <p>Zastosowane usprawnienia:</p>
-            <ol style="margin-left: 2rem; color: var(--text-muted); margin-bottom: 1.5rem;">
-                <li>Brak centralnego config - parametry są rozrzucone po plikach:
-MIN_DF=5, MAX_DF_RATIO=0.95 w z1_tdm.py
-DELAY=0.5, TIMEOUT=10 w fetch_pages.py
-KS = [3, 5, 7, 10, 15] w z3_k_means.py
-N_COMPONENTS=200 w z2_truncated_svd.py
-
-Jeden plik config.py wyeliminowałby potrzebę szukania, gdzie zmienić k.</li>
-                <li>main.py nic nie robi - wczytuje graf i na tym kończy. Albo powinien orchestrować cały pipeline, albo w ogóle go nie być.</li>
-                <li>z5_comparison.py to 369 linii - robi za dużo: oblicza metryki (NMI, ARI), buduje macierz pomyłek, generuje wykresy, analizuje case studies. Rozsądny podział to np. metrics.py + comparison_plots.py.</li>
-            </ol>
-            <p>Odrzucone usprawnienia:</p>
-            <ol style="margin-left: 2rem; color: var(--text-muted); margin-bottom: 1.5rem;">
-                <li>Custom implementacje NMI i ARI w z5_comparison.py są poprawne, ale sklearn.metrics oferuje te same funkcje.</li>
-                <li>Wielokrotne wczytywanie tych samych danych — corpus.json i lsi_documents.npy są ładowane niezależnie przez z5, z6_*, z7. Nie jest to problem przy ~1000 dokumentach, ale przy skalowaniu warto rozważyć np. cache.</li>
-                <li>Własna implementacja k-means (z3_k_means.py) uruchamia pętlę w czystym Pythonie z Euclidean distance liczoną ręcznie. Dla dużej liczby dokumentów sklearn KMeans będzie istotnie szybszy.</li>
-            </ol>
+            
+            <p style="margin-bottom: 0.5rem;"><strong>🛠️ Zastosowane usprawnienia architektoniczne:</strong></p>
+            <ul style="list-style-type: none; padding-left: 0; margin-bottom: 2rem;">
+                <li style="background: var(--accent-light); border-left: 4px solid var(--accent); padding: 1rem; margin-bottom: 0.75rem; border-radius: 0 var(--radius) var(--radius) 0;">
+                    <strong style="color: var(--accent); display: block; margin-bottom: 0.4rem;">1. Decentralizacja konfiguracji (Wprowadzenie config.py)</strong>
+                    <span style="color: var(--text-muted); font-size: 0.95rem;">
+                        Parametry były pierwotnie rozproszone po wielu plikach źródłowych:
+                        <div style="margin: 0.4rem 0; padding-left: 1rem; border-left: 2px dashed var(--accent);">
+                            • <code style="background: #ffffff; padding: 2px 5px; border-radius: 4px;">MIN_DF=5</code>, <code style="background: #ffffff; padding: 2px 5px; border-radius: 4px;">MAX_DF_RATIO=0.95</code> w <code style="color: var(--accent);">z1_tdm.py</code><br>
+                            • <code style="background: #ffffff; padding: 2px 5px; border-radius: 4px;">DELAY=0.5</code>, <code style="background: #ffffff; padding: 2px 5px; border-radius: 4px;">TIMEOUT=10</code> w <code style="color: var(--accent);">fetch_pages.py</code><br>
+                            • <code style="background: #ffffff; padding: 2px 5px; border-radius: 4px;">KS = [3, 5, 7, 10, 15]</code> w <code style="color: var(--accent);">z3_k_means.py</code><br>
+                            • <code style="background: #ffffff; padding: 2px 5px; border-radius: 4px;">N_COMPONENTS=200</code> w <code style="color: var(--accent);">z2_truncated_svd.py</code>
+                        </div>
+                        <strong>Rezultat:</strong> Wydzielenie jednego wspólnego pliku <code style="background: #ffffff; padding: 2px 5px; border-radius: 4px;">config.py</code> wyeliminowało potrzebę przeszukiwania kodu w celu zmiany parametrów eksperymentu (np. liczby klastrów <strong>k</strong>).
+                    </span>
+                </li>
+                
+                <li style="background: var(--accent-light); border-left: 4px solid var(--accent); padding: 1rem; margin-bottom: 0.75rem; border-radius: 0 var(--radius) var(--radius) 0;">
+                    <strong style="color: var(--accent); display: block; margin-bottom: 0.4rem;">2. Naprawa pliku orchestratora (main.py)</strong>
+                    <span style="color: var(--text-muted); font-size: 0.95rem;">
+                        Skrypt <code style="background: #ffffff; padding: 2px 5px; border-radius: 4px;">main.py</code> jedynie wczytywał graf i kończył działanie. 
+                        <br><strong>Rezultat:</strong> Przeprojektowano plik tak, aby pełnił rolę głównego kontrolera zarządzającego całym potokiem przetwarzania danych (*pipeline*).
+                    </span>
+                </li>
+                
+                <li style="background: var(--accent-light); border-left: 4px solid var(--accent); padding: 1rem; border-radius: 0 var(--radius) var(--radius) 0;">
+                    <strong style="color: var(--accent); display: block; margin-bottom: 0.4rem;">3. Dekompozycja zbyt dużych modułów</strong>
+                    <span style="color: var(--text-muted); font-size: 0.95rem;">
+                        Skrypt <code style="background: #ffffff; padding: 2px 5px; border-radius: 4px;">z5_comparison.py</code> posiadał aż 369 linii kodu i łamał zasadę pojedynczej odpowiedzialności (obliczał metryki NMI/ARI, budował macierze pomyłek, generował wykresy i analizował przypadki).
+                        <br><strong>Rezultat:</strong> Dokonano podziału na niezależne moduły: <code style="color: var(--accent);">metrics.py</code> oraz <code style="color: var(--accent);">comparison_plots.py</code>.
+                    </span>
+                </li>
+            </ul>
+            
+            <p style="margin-bottom: 0.5rem;"><strong>💡 Odrzucone usprawnienia:</strong></p>
+            <ul style="list-style-type: none; padding-left: 0;">
+                <li style="background: var(--bg-page); border-left: 4px solid #c4652a; padding: 1rem; margin-bottom: 0.75rem; border-radius: 0 var(--radius) var(--radius) 0;">
+                    <strong style="color: #c4652a; display: block; margin-bottom: 0.2rem;">• Zastąpienie autorskich metryk bibliotekami</strong>
+                    <span style="color: var(--text-muted); font-size: 0.95rem;">
+                        Własne implementacje NMI oraz ARI w <code style="background: #ffffff; padding: 2px 5px; border-radius: 4px;">z5_comparison.py</code> działają w 100% poprawnie, lecz docelowo stabilniejsze i bezpieczniejsze byłoby użycie gotowych funkcji z pakietu <code style="background: #ffffff; padding: 2px 5px; border-radius: 4px;">sklearn.metrics</code>.
+                    </span>
+                </li>
+                
+                <li style="background: var(--bg-page); border-left: 4px solid #c4652a; padding: 1rem; margin-bottom: 0.75rem; border-radius: 0 var(--radius) var(--radius) 0;">
+                    <strong style="color: #c4652a; display: block; margin-bottom: 0.2rem;">• Wielokrotne i redundantne I/O dyskowe</strong>
+                    <span style="color: var(--text-muted); font-size: 0.95rem;">
+                        Pliki <code style="background: #ffffff; padding: 2px 5px; border-radius: 4px;">corpus.json</code> oraz <code style="background: #ffffff; padding: 2px 5px; border-radius: 4px;">lsi_documents.npy</code> są ładowane niezależnie przez skrypty z5, z6_* oraz z7. Przy zbiorze ok. 1000 dokumentów nie stanowi to problemu wydajnościowego, jednak przy większej skali konieczne będzie wdrożenie mechanizmu buforowania (*caching*).
+                    </span>
+                </li>
+                
+                <li style="background: var(--bg-page); border-left: 4px solid #c4652a; padding: 1rem; border-radius: 0 var(--radius) var(--radius) 0;">
+                    <strong style="color: #c4652a; display: block; margin-bottom: 0.2rem;">• Optymalizacja implementacji k-means</strong>
+                    <span style="color: var(--text-muted); font-size: 0.95rem;">
+                        Własna implementacja k-means w <code style="background: #ffffff; padding: 2px 5px; border-radius: 4px;">z3_k_means.py</code> uruchamia pętlę w czystym Pythonie z Euclidean distance liczoną ręcznie. Dla dużej liczby dokumentów <code style="background: #ffffff; padding: 2px 5px; border-radius: 4px;">sklearn.cluster.KMeans</code> będzie istotnie szybszy.
+                    </span>
+                </li>
+            </ul>
         </section>
         
         <section id="wnioski" style="background: var(--accent); color: white;">
@@ -597,6 +929,39 @@ Jeden plik config.py wyeliminowałby potrzebę szukania, gdzie zmienić k.</li>
                     });
                 });
             });
+        });
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const slider = document.getElementById('z6-slider');
+            const overlay = document.getElementById('z6-overlay');
+            const line = document.getElementById('z6-line');
+            const button = document.getElementById('z6-button');
+            const container = document.getElementById('z6-comparison');
+            const overlayImg = overlay.querySelector('img');
+            
+            function moveSlider(value) {
+                // Aktualizacja szerokości widocznej części lewego obrazka
+                overlay.style.width = value + '%';
+                // Przesunięcie pionowej linii oraz okrągłego uchwytu
+                line.style.left = value + '%';
+                button.style.left = value + '%';
+            }
+            
+            function updateImgWidth() {
+                // Dopasowanie wewnętrznego obrazka nakładki do rzeczywistej szerokości kontenera
+                overlayImg.style.width = container.offsetWidth + 'px';
+            }
+            
+            // Reakcja na ruch suwaka
+            slider.addEventListener('input', (e) => {
+                moveSlider(e.target.value);
+            });
+            
+            // Dostosowanie szerokości przy zmianie rozmiaru okna przeglądarki (responsywność)
+            window.addEventListener('resize', updateImgWidth);
+            
+            // Inicjalizacja początkowa
+            updateImgWidth();
         });
     </script>
 </body>

@@ -5,8 +5,8 @@ import networkx as nx
 import numpy as np
 from sklearn.preprocessing import normalize
 
-from z4_communities import load_graph, detect_communities  # jeśli masz w module
-from z3_k_means import my_kmeans   # lub sklearn fallback
+from src.z4_communities import load_graph, detect_communities  # jeśli masz w module
+from src.z3_k_means import my_kmeans
 # albo wklej funkcje bezpośrednio
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -83,8 +83,8 @@ def draw_graph(G, pos, node_colors, title, path):
     nx.draw_networkx_edges(
         G,
         pos,
-        alpha=0.08,
-        width=0.3
+        alpha=0.03,
+        width=0.1
     )
 
     plt.title(title, fontsize=14)

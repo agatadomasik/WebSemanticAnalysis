@@ -5,7 +5,7 @@ from pathlib import Path
 import numpy as np
 from sklearn.preprocessing import normalize
 
-from src.config import KMEANS_KS as KS, BEST_K_FOR_HEATMAP, TOP_COMMUNITIES_FOR_HEATMAP
+from src.config import KMEANS_KS as KS, TOP_COMMUNITIES_FOR_HEATMAP
 from src.metrics import compute_nmi, compute_ari
 from src.comparison_plots import save_agreement_plot, save_confusion_heatmap
 from src.z3_k_means import my_kmeans
@@ -218,12 +218,14 @@ def main() -> None:
     agreement_results = evaluate_agreement_across_k(documents, corpus, communities)
     save_agreement_plot(agreement_results, REPORTS / "z5_agreement_vs_k.png")
 
-    print(f"\nBuilding detailed comparison for k={BEST_K_FOR_HEATMAP}...")
-    labels, _, _ = my_kmeans(documents, BEST_K_FOR_HEATMAP)
+    best_k = max(agreement_results, key=lambda r: r["nmi"])["k"]
+
+    print(f"\nBuilding detailed comparison for k={best_k} (highest NMI)...")
+    labels, _, _ = my_kmeans(documents, best_k)
     common_urls, cluster_vec, community_vec = build_alignment(corpus, labels, communities)
 
     matrix = confusion_matrix(
-        cluster_vec, community_vec, BEST_K_FOR_HEATMAP, len(communities)
+        cluster_vec, community_vec, best_k, len(communities)
     )
     save_confusion_heatmap(matrix, TOP_COMMUNITIES_FOR_HEATMAP, REPORTS / "z5_confusion.png")
 
@@ -239,7 +241,7 @@ def main() -> None:
     print("Writing report...")
     write_report(
         agreement_results,
-        BEST_K_FOR_HEATMAP,
+        best_k,
         len(communities),
         agreements,
         disagreements,

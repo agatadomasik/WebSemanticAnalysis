@@ -7,91 +7,95 @@ k= 5   n_common= 2610   NMI=0.2713   ARI=0.1219
 k= 7   n_common= 2610   NMI=0.3183   ARI=0.1839
 k=10   n_common= 2610   NMI=0.3809   ARI=0.1967
 k=15   n_common= 2610   NMI=0.4083   ARI=0.2113
+k=20   n_common= 2610   NMI=0.4239   ARI=0.1937
+k=25   n_common= 2610   NMI=0.4321   ARI=0.2043
+k=30   n_common= 2610   NMI=0.4620   ARI=0.2257
+k=37   n_common= 2610   NMI=0.4588   ARI=0.2049
 
-Detailed analysis below uses k=7 against 37 communities.
+Detailed analysis below uses k=30 against 37 communities.
 
 ============================================================
 AGREEMENT EXAMPLES (same cluster AND same community)
 ============================================================
 
-Community 2 / Cluster 0 (276 shared documents)
-  https://warwick.ac.uk/study/international/admissions/entry-requirements
-  https://warwick.ac.uk/study/postgraduate/apply
-  https://warwick.ac.uk/study/postgraduate/apply/admissionspolicy
-  https://warwick.ac.uk/study/postgraduate/apply/english
-  https://warwick.ac.uk/study/postgraduate/apply/faqs
+Community 2 / Cluster 26 (148 shared documents)
+  https://warwick.ac.uk/study/postgraduate/courses-2024/professionaleducation
+  https://warwick.ac.uk/study/postgraduate/courses/dba-business-administration
+  https://warwick.ac.uk/study/postgraduate/courses/diploma-msc-economics
+  https://warwick.ac.uk/study/postgraduate/courses/diploma-msc-mathematics
+  https://warwick.ac.uk/study/postgraduate/courses/llm-advanced-legal-studies
 
-Community 9 / Cluster 6 (170 shared documents)
+Community 8 / Cluster 27 (126 shared documents)
+  https://warwick.ac.uk/study/international/countryinformation/caribbean/anguilla
+  https://warwick.ac.uk/study/international/countryinformation/caribbean/antigua_barbuda
+  https://warwick.ac.uk/study/international/countryinformation/caribbean/aruba
+  https://warwick.ac.uk/study/international/countryinformation/caribbean/bahamas
+  https://warwick.ac.uk/study/international/countryinformation/caribbean/barbados
+
+Community 9 / Cluster 5 (118 shared documents)
   https://warwick.ac.uk/alumni/alumni-news
   https://warwick.ac.uk/alumni/alumni-news/all-news
   https://warwick.ac.uk/alumni/alumni-news/all-news/?filters=Question and Answer
-  https://warwick.ac.uk/alumni/alumni-news/all-news/anna-product-manager
   https://warwick.ac.uk/alumni/alumni-news/all-news/gabriela-jozefowicz
-
-Community 8 / Cluster 0 (130 shared documents)
-  https://warwick.ac.uk/study/ifp
-  https://warwick.ac.uk/study/international/admissions
-  https://warwick.ac.uk/study/international/admissions/englishlanguage
-  https://warwick.ac.uk/study/international/countryinformation
-  https://warwick.ac.uk/study/international/countryinformation/caribbean/anguilla
+  https://warwick.ac.uk/alumni/alumni-news/all-news/joe-oakley/?fbclid=IwY2xjawNLCshleHRuA2FlbQIxMABicmlkETBVdkcyYmRFcFREM2ptTU5uAR5TNDa6by0Grbcq08qHRkuqerOE06LX1Ezxhl5UXiqfCAtZDAJ2pRDb66lXTg_aem_ZHPEa-WAmbno1K1T8pUS9Q
 
 ============================================================
 DISAGREEMENT EXAMPLES (same semantic cluster, scattered communities)
 ============================================================
 
-Cluster 4 spans 32 different communities
-  Community 0: 74 doc(s), e.g. https://warwick.ac.uk/about/contact
-  Community 3: 65 doc(s), e.g. https://warwick.ac.uk/accessibility
-  Community 16: 45 doc(s), e.g. http://warwick.ac.uk/library
-  Community 28: 34 doc(s), e.g. https://warwick.ac.uk/research/rtp
-  Community 5: 30 doc(s), e.g. https://warwick.ac.uk/study/complaintsprocedure
+Cluster 6 spans 30 different communities
+  Community 3: 45 doc(s), e.g. https://warwick.ac.uk/aup
+  Community 28: 35 doc(s), e.g. https://warwick.ac.uk/research/rtp
+  Community 0: 20 doc(s), e.g. https://warwick.ac.uk/about/campus-journey/mode-of-travel/cycling/repair
+  Community 15: 15 doc(s), e.g. https://warwick.ac.uk/services/ris/impactinnovation/impact-academy/participatoryresearch
+  Community 14: 8 doc(s), e.g. http://warwick.ac.uk/helpdesk
 
-Cluster 1 spans 27 different communities
-  Community 0: 88 doc(s), e.g. http://warwick.ac.uk/maps
-  Community 5: 47 doc(s), e.g. https://warwick.ac.uk/about/visiting/?location=footer
-  Community 10: 43 doc(s), e.g. http://warwick.ac.uk/bookshop
-  Community 17: 27 doc(s), e.g. https://warwick.ac.uk/services/dean-of-students-office/informationforstudents
-  Community 8: 22 doc(s), e.g. https://warwick.ac.uk/events
+Cluster 20 spans 26 different communities
+  Community 0: 43 doc(s), e.g. https://warwick.ac.uk/about/60/faq
+  Community 5: 41 doc(s), e.g. https://warwick.ac.uk/study/events/faqs
+  Community 10: 39 doc(s), e.g. http://warwick.ac.uk/bookshop
+  Community 8: 16 doc(s), e.g. https://warwick.ac.uk/events/?calendarItem=8ac672c49bb6a87a019bc63de9477d7b
+  Community 11: 15 doc(s), e.g. https://warwick.ac.uk/services/careers/contact
 
-Cluster 3 spans 27 different communities
-  Community 6: 66 doc(s), e.g. https://warwick.ac.uk/research/data-science/warwick-data
-  Community 1: 57 doc(s), e.g. https://warwick.ac.uk/departments/a2z
-  Community 0: 42 doc(s), e.g. https://warwick.ac.uk
-  Community 15: 33 doc(s), e.g. http://warwick.ac.uk/ris
-  Community 12: 30 doc(s), e.g. https://warwick.ac.uk/fac/med/about/centres/cahrd
+Cluster 15 spans 24 different communities
+  Community 1: 43 doc(s), e.g. https://warwick.ac.uk/departments/a2z
+  Community 0: 28 doc(s), e.g. https://warwick.ac.uk
+  Community 4: 22 doc(s), e.g. http://warwick.ac.uk/modernlanguages
+  Community 7: 21 doc(s), e.g. https://warwick.ac.uk/fac/sci
+  Community 6: 14 doc(s), e.g. https://warwick.ac.uk/research/data-science/warwick-data
 
 ============================================================
 NAVIGATION HUBS (high degree, possibly semantically heterogeneous)
 ============================================================
-15 top-degree hubs span 4 distinct semantic clusters but only 7 distinct communities.
+15 top-degree hubs span 9 distinct semantic clusters but only 7 distinct communities.
 
-  degree= 3029  community=  0  cluster=3  url=https://warwick.ac.uk
+  degree= 3029  community=  0  cluster=15  url=https://warwick.ac.uk
       top terms: research, news, world, scienc, jun
-  degree= 3022  community=  4  cluster=4  url=https://warwick.ac.uk/privacy
+  degree= 3022  community=  4  cluster=6  url=https://warwick.ac.uk/privacy
       top terms: notic, data, complaint, inform, new
-  degree= 3015  community=  3  cluster=4  url=https://warwick.ac.uk/accessibility
+  degree= 3015  community=  3  cluster=1  url=https://warwick.ac.uk/accessibility
       top terms: access, inclus, item, statement, student
-  degree= 3014  community=  6  cluster=4  url=https://warwick.ac.uk/modernslavery
+  degree= 3014  community=  6  cluster=6  url=https://warwick.ac.uk/modernslavery
       top terms: slaveri, modern, act, polici, includ
-  degree= 3013  community=  3  cluster=4  url=https://warwick.ac.uk/cookies
+  degree= 3013  community=  3  cluster=6  url=https://warwick.ac.uk/cookies
       top terms: use, visit, browser, inform, opt
-  degree= 3012  community=  3  cluster=4  url=https://warwick.ac.uk/copyright
+  degree= 3012  community=  3  cluster=25  url=https://warwick.ac.uk/copyright
       top terms: web, agre, use, includ, materi
-  degree= 2752  community=  0  cluster=4  url=https://warwick.ac.uk/sitebuilder
+  degree= 2752  community=  0  cluster=25  url=https://warwick.ac.uk/sitebuilder
       top terms: sitebuild, use, compon, web, editor
-  degree= 2749  community=  0  cluster=3  url=https://warwick.ac.uk/news
+  degree= 2749  community=  0  cluster=15  url=https://warwick.ac.uk/news
       top terms: news, jun, research, media, scienc
-  degree= 2742  community= 24  cluster=4  url=https://warwick.ac.uk/conduct
+  degree= 2742  community= 24  cluster=19  url=https://warwick.ac.uk/conduct
       top terms: misconduct, sexual, student, polici, behaviour
-  degree= 2734  community= 26  cluster=2  url=https://warwick.ac.uk/vacancies
+  degree= 2734  community= 26  cluster=14  url=https://warwick.ac.uk/vacancies
       top terms: vacanc, research, inclus, intern, current
-  degree= 2728  community=  0  cluster=2  url=https://warwick.ac.uk/business
+  degree= 2728  community=  0  cluster=11  url=https://warwick.ac.uk/business
       top terms: innov, new, busi, school, connect
-  degree= 2725  community=  0  cluster=3  url=https://warwick.ac.uk/research
+  degree= 2725  community=  0  cluster=9  url=https://warwick.ac.uk/research
       top terms: research, impact, cultur, world, news
-  degree= 2721  community=  0  cluster=6  url=https://warwick.ac.uk/study
+  degree= 2721  community=  0  cluster=5  url=https://warwick.ac.uk/study
       top terms: studi, connect, level, undergradu, postgradu
-  degree= 2720  community=  0  cluster=4  url=https://warwick.ac.uk/terms/general
+  degree= 2720  community=  0  cluster=6  url=https://warwick.ac.uk/terms/general
       top terms: use, term, must, may, right
-  degree= 2718  community=  8  cluster=6  url=https://warwick.ac.uk/alumni
+  degree= 2718  community=  8  cluster=5  url=https://warwick.ac.uk/alumni
       top terms: alumni, communiti, support, updat, graduat

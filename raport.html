@@ -271,10 +271,10 @@
             <div class="authors">👤 Agata Domasik | 👤 Mateusz Merda</div>
             <div class="stat-bar">
                 <div class="stat-pill">TDM: <b>5856 × 2610</b> (1.1% niezerowe)</div>
-                <div class="stat-pill">LSI: <b>k=15</b> komponent (75.5% wariancji przy k=50)</div>
-                <div class="stat-pill">k-means: <b>k=15</b> klastrów, silhouette <b>0.13</b></div>
+                <div class="stat-pill">LSI: elbow przy <b>k≈15-20</b>, do dalszej analizy użyto <b>200</b> komponent (88.7% wariancji)</div>
+                <div class="stat-pill">k-means: <b>k=30</b> klastrów, silhouette <b>0.19</b> (zakres testów rozszerzony do k=37)</div>
                 <div class="stat-pill">Louvain: <b>37</b> communities, Q=<b>0.61</b></div>
-                <div class="stat-pill">Zgodność: NMI=<b>0.41</b>, ARI=<b>0.21</b></div>
+                <div class="stat-pill">Zgodność (k=30): NMI=<b>0.46</b>, ARI=<b>0.23</b></div>
             </div>
         </header>
         
@@ -396,103 +396,133 @@
                 <div style="display: block; text-align: center; margin: 1.5rem 0; background: var(--bg-card); padding: 1.5rem; border: 1px solid var(--border); border-radius: var(--radius);">
                     
                     <div style="display: inline-block; width: 100%; max-width: 420px; vertical-align: top; margin: 10px; padding: 10px; background: #ffffff; border: 1px solid #f0ede6; border-radius: 6px;">
-                        <h5 style="font-family: 'DM Sans', sans-serif; color: var(--text-main); margin-bottom: 10px; font-size: 0.95rem;">Metoda Łokcia (WCSS vs k)</h5>
+                        <h5 style="font-family: 'DM Sans', sans-serif; color: var(--text-main); margin-bottom: 10px; font-size: 0.95rem;">Metoda Łokcia (WCSS vs k) — zakres rozszerzony do k=37</h5>
                         <svg viewBox="0 0 400 250" style="width: 100%; font-family: 'DM Sans', sans-serif;">
-                            <line x1="40" y1="40" x2="380" y2="40" stroke="#f0f0f0" stroke-width="1" />
-                            <text x="35" y="44" fill="#888" font-size="10" text-anchor="end">2200</text>
-                            
-                            <line x1="40" y1="96.6" x2="380" y2="96.6" stroke="#f0f0f0" stroke-width="1" />
-                            <text x="35" y="100.6" fill="#888" font-size="10" text-anchor="end">2000</text>
-                            
-                            <line x1="40" y1="153.3" x2="380" y2="153.3" stroke="#f0f0f0" stroke-width="1" />
-                            <text x="35" y="157.3" fill="#888" font-size="10" text-anchor="end">1800</text>
-                            
+                            <line x1="40" y1="43.7" x2="380" y2="43.7" stroke="#f0f0f0" stroke-width="1" />
+                            <text x="35" y="47.7" fill="#888" font-size="10" text-anchor="end">2100</text>
+
+                            <line x1="40" y1="100.4" x2="380" y2="100.4" stroke="#f0f0f0" stroke-width="1" />
+                            <text x="35" y="104.4" fill="#888" font-size="10" text-anchor="end">1900</text>
+
+                            <line x1="40" y1="157.2" x2="380" y2="157.2" stroke="#f0f0f0" stroke-width="1" />
+                            <text x="35" y="161.2" fill="#888" font-size="10" text-anchor="end">1700</text>
+
                             <line x1="40" y1="210" x2="380" y2="210" stroke="#bbb" stroke-width="1" />
-                            <text x="35" y="214" fill="#888" font-size="10" text-anchor="end">1600</text>
-                            
+                            <text x="35" y="214" fill="#888" font-size="10" text-anchor="end">1500</text>
+
                             <line x1="40" y1="40" x2="40" y2="210" stroke="#bbb" stroke-width="1" stroke-dasharray="2,2" />
-                            
-                            <polyline points="100,64.7 140,88.6 180,96.9 240,126.8 340,162.0" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-                            
-                            <circle cx="100" cy="64.7" r="5" fill="var(--accent)" />
-                            <text x="100" y="52" fill="var(--text-main)" font-size="10" font-weight="bold" text-anchor="middle">2112.9</text>
-                            <text x="100" y="228" fill="var(--text-muted)" font-size="11" font-weight="600" text-anchor="middle">k=3</text>
-                            
-                            <circle cx="140" cy="88.6" r="5" fill="var(--accent)" />
-                            <text x="140" y="76" fill="var(--text-main)" font-size="10" font-weight="bold" text-anchor="middle">2028.4</text>
-                            <text x="140" y="228" fill="var(--text-muted)" font-size="11" font-weight="600" text-anchor="middle">k=5</text>
-                            
-                            <circle cx="180" cy="96.9" r="5" fill="var(--accent)" />
-                            <text x="180" y="85" fill="var(--text-main)" font-size="10" font-weight="bold" text-anchor="middle">1999.0</text>
-                            <text x="180" y="228" fill="var(--text-muted)" font-size="11" font-weight="600" text-anchor="middle">k=7</text>
-                            
-                            <circle cx="240" cy="126.8" r="5" fill="var(--accent)" />
-                            <text x="240" y="115" fill="var(--text-main)" font-size="10" font-weight="bold" text-anchor="middle">1893.6</text>
-                            <text x="240" y="228" fill="var(--text-muted)" font-size="11" font-weight="600" text-anchor="middle">k=10</text>
-                            
-                            <circle cx="340" cy="162.0" r="5" fill="var(--accent)" />
-                            <text x="340" y="150" fill="var(--text-main)" font-size="10" font-weight="bold" text-anchor="middle">1769.6</text>
-                            <text x="340" y="228" fill="var(--text-muted)" font-size="11" font-weight="600" text-anchor="middle">k=15</text>
+
+                            <polyline points="70.0,40.0 87.6,64.0 105.3,72.3 131.8,102.3 175.9,137.5 220.0,155.9 264.1,178.6 308.2,196.3 370.0,210.0" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+
+                            <circle cx="70.0" cy="40.0" r="4" fill="var(--accent)" />
+                            <text x="70.0" y="30.0" fill="var(--text-main)" font-size="9" font-weight="bold" text-anchor="middle">2113</text>
+                            <text x="70.0" y="228" fill="var(--text-muted)" font-size="9" font-weight="600" text-anchor="middle">k=3</text>
+
+                            <circle cx="87.6" cy="64.0" r="4" fill="var(--accent)" />
+                            <text x="87.6" y="46.0" fill="var(--text-main)" font-size="9" font-weight="bold" text-anchor="middle">2028</text>
+                            <text x="87.6" y="228" fill="var(--text-muted)" font-size="9" font-weight="600" text-anchor="middle">k=5</text>
+
+                            <circle cx="105.3" cy="72.3" r="4" fill="var(--accent)" />
+                            <text x="105.3" y="62.3" fill="var(--text-main)" font-size="9" font-weight="bold" text-anchor="middle">1999</text>
+                            <text x="105.3" y="228" fill="var(--text-muted)" font-size="9" font-weight="600" text-anchor="middle">k=7</text>
+
+                            <circle cx="131.8" cy="102.3" r="4" fill="var(--accent)" />
+                            <text x="131.8" y="84.3" fill="var(--text-main)" font-size="9" font-weight="bold" text-anchor="middle">1894</text>
+                            <text x="131.8" y="228" fill="var(--text-muted)" font-size="9" font-weight="600" text-anchor="middle">k=10</text>
+
+                            <circle cx="175.9" cy="137.5" r="4" fill="var(--accent)" />
+                            <text x="175.9" y="127.5" fill="var(--text-main)" font-size="9" font-weight="bold" text-anchor="middle">1770</text>
+                            <text x="175.9" y="228" fill="var(--text-muted)" font-size="9" font-weight="600" text-anchor="middle">k=15</text>
+
+                            <circle cx="220.0" cy="155.9" r="4" fill="var(--accent)" />
+                            <text x="220.0" y="137.9" fill="var(--text-main)" font-size="9" font-weight="bold" text-anchor="middle">1705</text>
+                            <text x="220.0" y="228" fill="var(--text-muted)" font-size="9" font-weight="600" text-anchor="middle">k=20</text>
+
+                            <circle cx="264.1" cy="178.6" r="4" fill="var(--accent)" />
+                            <text x="264.1" y="168.6" fill="var(--text-main)" font-size="9" font-weight="bold" text-anchor="middle">1625</text>
+                            <text x="264.1" y="228" fill="var(--text-muted)" font-size="9" font-weight="600" text-anchor="middle">k=25</text>
+
+                            <circle cx="308.2" cy="196.3" r="4" fill="var(--accent)" />
+                            <text x="308.2" y="178.3" fill="var(--text-main)" font-size="9" font-weight="bold" text-anchor="middle">1562</text>
+                            <text x="308.2" y="228" fill="var(--text-muted)" font-size="9" font-weight="600" text-anchor="middle">k=30</text>
+
+                            <circle cx="370.0" cy="210.0" r="4" fill="var(--accent)" />
+                            <text x="370.0" y="200.0" fill="var(--text-main)" font-size="9" font-weight="bold" text-anchor="middle">1514</text>
+                            <text x="370.0" y="228" fill="var(--text-muted)" font-size="9" font-weight="600" text-anchor="middle">k=37</text>
                         </svg>
                     </div>
                     
                     <div style="display: inline-block; width: 100%; max-width: 420px; vertical-align: top; margin: 10px; padding: 10px; background: #ffffff; border: 1px solid #f0ede6; border-radius: 6px;">
-                        <h5 style="font-family: 'DM Sans', sans-serif; color: var(--text-main); margin-bottom: 10px; font-size: 0.95rem;">Indeks Sylwetki (Silhouette vs k)</h5>
+                        <h5 style="font-family: 'DM Sans', sans-serif; color: var(--text-main); margin-bottom: 10px; font-size: 0.95rem;">Indeks Sylwetki (Silhouette vs k) — zakres rozszerzony do k=37</h5>
                         <svg viewBox="0 0 400 250" style="width: 100%; font-family: 'DM Sans', sans-serif;">
-                            <line x1="40" y1="40" x2="380" y2="40" stroke="#f0f0f0" stroke-width="1" />
-                            <text x="35" y="44" fill="#888" font-size="10" text-anchor="end">0.14</text>
-                            
-                            <line x1="40" y1="82.5" x2="380" y2="82.5" stroke="#f0f0f0" stroke-width="1" />
-                            <text x="35" y="86.5" fill="#888" font-size="10" text-anchor="end">0.12</text>
-                            
-                            <line x1="40" y1="125" x2="380" y2="125" stroke="#f0f0f0" stroke-width="1" />
-                            <text x="35" y="129" fill="#888" font-size="10" text-anchor="end">0.10</text>
-                            
-                            <line x1="40" y1="167.5" x2="380" y2="167.5" stroke="#f0f0f0" stroke-width="1" />
-                            <text x="35" y="171.5" fill="#888" font-size="10" text-anchor="end">0.08</text>
-                            
-                            <line x1="40" y1="210" x2="380" y2="210" stroke="#bbb" stroke-width="1" />
-                            <text x="35" y="214" fill="#888" font-size="10" text-anchor="end">0.06</text>
-                            
+                            <line x1="40" y1="49.1" x2="380" y2="49.1" stroke="#f0f0f0" stroke-width="1" />
+                            <text x="35" y="53.1" fill="#888" font-size="10" text-anchor="end">0.18</text>
+
+                            <line x1="40" y1="94.6" x2="380" y2="94.6" stroke="#f0f0f0" stroke-width="1" />
+                            <text x="35" y="98.6" fill="#888" font-size="10" text-anchor="end">0.15</text>
+
+                            <line x1="40" y1="140.2" x2="380" y2="140.2" stroke="#f0f0f0" stroke-width="1" />
+                            <text x="35" y="144.2" fill="#888" font-size="10" text-anchor="end">0.12</text>
+
+                            <line x1="40" y1="185.7" x2="380" y2="185.7" stroke="#bbb" stroke-width="1" />
+                            <text x="35" y="189.7" fill="#888" font-size="10" text-anchor="end">0.09</text>
+
                             <line x1="40" y1="40" x2="40" y2="210" stroke="#bbb" stroke-width="1" stroke-dasharray="2,2" />
-                            
-                            <polyline points="100,179.6 140,173.4 180,174.5 240,131.6 340,51.7" fill="none" stroke="#c4652a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-                            
-                            <circle cx="100" cy="179.6" r="5" fill="#c4652a" />
-                            <text x="100" y="194" fill="var(--text-main)" font-size="10" font-weight="bold" text-anchor="middle">0.0743</text>
-                            <text x="100" y="228" fill="var(--text-muted)" font-size="11" font-weight="600" text-anchor="middle">k=3</text>
-                            
-                            <circle cx="140" cy="173.4" r="5" fill="#c4652a" />
-                            <text x="140" y="161" fill="var(--text-main)" font-size="10" font-weight="bold" text-anchor="middle">0.0772</text>
-                            <text x="140" y="228" fill="var(--text-muted)" font-size="11" font-weight="600" text-anchor="middle">k=5</text>
-                            
-                            <circle cx="180" cy="174.5" r="5" fill="#c4652a" />
-                            <text x="180" y="162" fill="var(--text-main)" font-size="10" font-weight="bold" text-anchor="middle">0.0767</text>
-                            <text x="180" y="228" fill="var(--text-muted)" font-size="11" font-weight="600" text-anchor="middle">k=7</text>
-                            
-                            <circle cx="240" cy="131.6" r="5" fill="#c4652a" />
-                            <text x="240" y="119" fill="var(--text-main)" font-size="10" font-weight="bold" text-anchor="middle">0.0969</text>
-                            <text x="240" y="228" fill="var(--text-muted)" font-size="11" font-weight="600" text-anchor="middle">k=10</text>
-                            
-                            <circle cx="340" cy="51.7" r="5" fill="#c4652a" />
-                            <text x="340" y="40" fill="var(--text-main)" font-size="10" font-weight="bold" text-anchor="middle">0.1345</text>
-                            <text x="340" y="228" fill="var(--text-muted)" font-size="11" font-weight="600" text-anchor="middle">k=15</text>
+
+                            <polyline points="70.0,210.0 87.6,205.4 105.3,205.4 131.8,175.1 175.9,118.9 220.0,111.3 264.1,70.4 308.2,40.0 370.0,55.2" fill="none" stroke="#c4652a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+
+                            <circle cx="70.0" cy="210.0" r="4" fill="#c4652a" />
+                            <text x="70.0" y="200.0" fill="var(--text-main)" font-size="9" font-weight="bold" text-anchor="middle">0.074</text>
+                            <text x="70.0" y="228" fill="var(--text-muted)" font-size="9" font-weight="600" text-anchor="middle">k=3</text>
+
+                            <circle cx="87.6" cy="205.4" r="4" fill="#c4652a" />
+                            <text x="87.6" y="187.4" fill="var(--text-main)" font-size="9" font-weight="bold" text-anchor="middle">0.077</text>
+                            <text x="87.6" y="228" fill="var(--text-muted)" font-size="9" font-weight="600" text-anchor="middle">k=5</text>
+
+                            <circle cx="105.3" cy="205.4" r="4" fill="#c4652a" />
+                            <text x="105.3" y="195.4" fill="var(--text-main)" font-size="9" font-weight="bold" text-anchor="middle">0.077</text>
+                            <text x="105.3" y="228" fill="var(--text-muted)" font-size="9" font-weight="600" text-anchor="middle">k=7</text>
+
+                            <circle cx="131.8" cy="175.1" r="4" fill="#c4652a" />
+                            <text x="131.8" y="157.1" fill="var(--text-main)" font-size="9" font-weight="bold" text-anchor="middle">0.097</text>
+                            <text x="131.8" y="228" fill="var(--text-muted)" font-size="9" font-weight="600" text-anchor="middle">k=10</text>
+
+                            <circle cx="175.9" cy="118.9" r="4" fill="#c4652a" />
+                            <text x="175.9" y="108.9" fill="var(--text-main)" font-size="9" font-weight="bold" text-anchor="middle">0.134</text>
+                            <text x="175.9" y="228" fill="var(--text-muted)" font-size="9" font-weight="600" text-anchor="middle">k=15</text>
+
+                            <circle cx="220.0" cy="111.3" r="4" fill="#c4652a" />
+                            <text x="220.0" y="93.3" fill="var(--text-main)" font-size="9" font-weight="bold" text-anchor="middle">0.139</text>
+                            <text x="220.0" y="228" fill="var(--text-muted)" font-size="9" font-weight="600" text-anchor="middle">k=20</text>
+
+                            <circle cx="264.1" cy="70.4" r="4" fill="#c4652a" />
+                            <text x="264.1" y="60.4" fill="var(--text-main)" font-size="9" font-weight="bold" text-anchor="middle">0.166</text>
+                            <text x="264.1" y="228" fill="var(--text-muted)" font-size="9" font-weight="600" text-anchor="middle">k=25</text>
+
+                            <circle cx="308.2" cy="40.0" r="4" fill="#c4652a" />
+                            <text x="308.2" y="22.0" fill="var(--text-main)" font-size="9" font-weight="bold" text-anchor="middle">0.186</text>
+                            <text x="308.2" y="228" fill="var(--text-muted)" font-size="9" font-weight="600" text-anchor="middle">k=30</text>
+
+                            <circle cx="370.0" cy="55.2" r="4" fill="#c4652a" />
+                            <text x="370.0" y="45.2" fill="var(--text-main)" font-size="9" font-weight="bold" text-anchor="middle">0.176</text>
+                            <text x="370.0" y="228" fill="var(--text-muted)" font-size="9" font-weight="600" text-anchor="middle">k=37</text>
                         </svg>
                     </div>
                 </div>
-                Wykresy Elbow (WCSS vs k) oraz Silhouette score vs k
+                Wykresy Elbow (WCSS vs k) oraz Silhouette score vs k — zakres testowanych k rozszerzony z [3,5,7,10,15] do [3,5,7,10,15,20,25,30,37]
             </div>
             
-            <p><strong>Wybrane k: 15</strong></p>
-            <p><em>Przykładowe klastry (Top termy i przykładowe dokumenty):</em></p>
+            <p><strong>Wybrane k: 30</strong> (dawniej 15 — najlepsze z pierwotnego, węższego zakresu testów)</p>
+            <p><em>Przykładowe klastry dla k=30 (Top termy i przykładowe dokumenty) — te same klastry pojawiają się dalej w analizie zgodności w Z5:</em></p>
             <div class="result-box" style="text-align: left;">
                 <ul>
-                    <li><strong>Klaster 2:</strong> [Top 10 termów] - <em>requir, appli, visa, tuberculosi, guidanc, differenti, immigr, arrang, scholarship, foundat</em></li>
-                    <li><strong>Klaster 13:</strong> [Top 10 termów] - <em>caribbean, cape, grade, unit, exclud, uwi, requir, studi, subject, appli</em></li>
+                    <li><strong>Klaster 26</strong> — top termy: <em>modul, fee, msc, cours, cost, career, postgradu, tuition, option, core</em> — kursy podyplomowe (por. Z5: community 2 / cluster 26).</li>
+                    <li><strong>Klaster 27</strong> — top termy: <em>requir, appli, visa, grade, tuberculosi, guidanc, differenti, immigr, foundat, scholarship</em> — wymogi wizowe / informacje per kraj (por. Z5: community 8 / cluster 27).</li>
+                    <li><strong>Klaster 2</strong> — top termy: <em>apprenticeship, apprentic, levi, degre, employ, engin, skill, job, standard, train</em> — bardzo czysty, wąsko zdefiniowany temat (apprenticeships), najwyższa waga top-termu ze wszystkich klastrów (0.62).</li>
                 </ul>
             </div>
             
-            <div class="section-result"><b>Wynik:</b> najlepsze k=15 (najwyższy silhouette ≈0.13, najniższy WCSS), choć krzywa elbow sugeruje, że nawet wyższe k mogłoby dać dalszą poprawę.</div>
+            <div class="section-result"><b>Wynik:</b> po rozszerzeniu testowanego zakresu z [3,5,7,10,15] do [3,5,7,10,15,20,25,30,37] silhouette rośnie aż do <b>k=30</b> (0.186 własna implementacja / 0.201 sklearn) — <b>k=30 jako najlepsze potwierdzają obie implementacje niezależnie</b>. Przy k=37 własna implementacja pokazuje niewielki spadek (0.176), sklearn (z wielokrotnym restartem) pokazuje w tym miejscu bardzo podobne wyniki (0.2004 ≈ 0.2005) — więc k=15 na pewno nie było prawdziwym optimum, ale to, czy k=37 jest realnie *gorsze* od k=30, czy tylko z nim zrównane, wymaga ostrożniejszego sformułowania.</div>
 
             <div class="doc-grid">
                 <div class="doc-item">
@@ -511,9 +541,11 @@
                 </div>
                 <div class="doc-item full-width">
                     <h4>✅ Walidacja</h4>
-                    <p class="tldr">Wyniki zgodne ze sklearn KMeans. Silhouette 0.07–0.13 jest niskie, ale oczekiwane dla stron jednej uczelni o płynnych granicach tematycznych.</p>
+                    <p class="tldr">sklearn, dopiero co przeliczony na pełnym zakresie do k=37, niezależnie potwierdza k=30 jako najlepsze. Przy wyższych k sklearn systematycznie daje wyższy silhouette niż własna implementacja — i, co ważne, w wersji sklearn spadek przy k=37 jest znikomy, w przeciwieństwie do nieco wyraźniejszego spadku we własnej implementacji.</p>
                     <details class="more"><summary>Rozwiń pełną walidację</summary>
-                    <p>sklearn KMeans dał zbliżone wyniki do własnej implementacji — prawdopodobnie poprawnej. WCSS spada z rosnącym k (oczekiwane), a silhouette 0.07-0.13 jest niskie, ale typowe dla stron jednej uczelni o płynnych granicach tematów. k=15 dało najlepszy silhouette i najniższy WCSS, ale krzywa elbow nie spłaszczyła się jeszcze wyraźnie — różnica WCSS między k=10 a k=15 wciąż jest znacząca, więc wyższe k mogłoby dać dalszą poprawę.</p>
+                    <p>Po odkomentowaniu wywołania sklearn i przeliczeniu go na pełnym, rozszerzonym zakresie (k=3...37) sklearn niezależnie wybrał <strong>Best k = 30</strong> — dokładnie to samo, co wcześniej wskazała własna implementacja. To mocne potwierdzenie: dwie różne implementacje k-means zgadzają się co do najlepszego k.</p>
+                    <p>WCSS zgadza się bardzo dobrze na całym zakresie (różnice 0-3.4%, sklearn systematycznie odrobinę niższy — spodziewane, bo `n_init=10` daje mu więcej szans na trafienie lepszego rozwiązania). Silhouette natomiast rozjeżdża się bardziej niż na wąskim zakresie: przy wyższych k (20, 25, 30, 37) sklearn daje wyraźnie wyższe wartości niż własna implementacja (różnice 8-14%, nie tylko przy k=7 jak wcześniej). To sugeruje, że problem pojedynczego losowego startu (bez wielokrotnych prób jak w sklearn) staje się bardziej dotkliwy przy większej liczbie klastrów — więcej klastrów to więcej okazji, żeby jeden zły start zepsuł wynik.</p>
+                    <p><strong>Ważna nowa obserwacja:</strong> spadek silhouette przy k=37 (który we własnej implementacji wyglądał na wyraźny sygnał "przeklastrowania": 0.186→0.176, spadek o 4.9%) w wersji sklearn jest praktycznie niezauważalny (0.2005→0.2004, spadek o 0.05% — statystycznie nieodróżnialne). Oznacza to, że wcześniejszy wniosek "silhouette realnie spada przy k=37" był częściowo artefaktem jednorazowego losowego startu we własnej implementacji, a nie w pełni potwierdzonym zjawiskiem. Sklearn sugeruje raczej, że jakość klastrowania <em>płaskoszczytuje</em> gdzieś w okolicach k=30-37, niż że k=37 jest wyraźnie gorsze. Wniosek "k=30 to najlepszy wybór" pozostaje trafny (oba potwierdzają to samo najlepsze k), ale silniejsza wersja wniosku ("k=37 jest gorsze, bo model się przeklastrowuje") wymaga ostrożniejszego sformułowania — dobrym krokiem na przyszłość byłoby przeliczenie też porównania NMI/ARI z Z5 na klastrowaniu ze sklearn zamiast własnej implementacji, żeby sprawdzić, czy tamten spadek przy k=37 również przetrwa czy okaże się podobnym artefaktem.</p>
                     </details>
                 </div>
             </div>
@@ -559,30 +591,41 @@
             <div class="result-box">
                 <img src="reports/z5_agreement_vs_k.png" style="width: 100%; border-radius: 8px;">
                 <img src="reports/z5_confusion.png" style="width: 100%; border-radius: 8px;">
-                Heatmapa macierzy konfuzji (communities vs klastry k-means) oraz Wykres NMI/ARI dla różnych k
+                Wykres NMI/ARI dla k od 3 do 37 oraz heatmapa macierzy konfuzji (communities vs klastry k-means) — heatmapa liczona teraz dla k=30 (poprzednio zahardkodowane k=7)
             </div>
             
-            <p><strong>Analiza przypadków (Huby i anomalie):</strong></p>
+            <p><strong>Analiza przypadków (Huby i anomalie) — dla k=30:</strong></p>
             <ul style="color: var(--text-muted); margin-left: 2rem;">
-                <li><strong>Zgoda:</strong> Community 2 / Cluster 0 — 276 dok., /study/postgraduate/apply/..., /study/international/admissions/... (rekrutacja).
-Community 9 / Cluster 6 — 170 dok., /alumni/alumni-news/... (newsy absolwentów).
-Community 8 / Cluster 0 — 130 dok., /study/international/countryinformation/... (informacje per kraj, ten sam klaster co C2, inna community - podsekcja tematu).
+                <li><strong>Zgoda:</strong> Community 2 / Cluster 26 — 148 dok., /study/postgraduate/courses/... (kursy podyplomowe: DBA, MSc Economics, MSc Mathematics, LLM).
+Community 8 / Cluster 27 — 126 dok., /study/international/countryinformation/caribbean/... (informacje per kraj karaibski).
+Community 9 / Cluster 5 — 118 dok., /alumni/alumni-news/... (newsy absolwentów).
 </li>
-                <li><strong>Niezgoda:</strong> Cluster 4 rozsiany po 32 community — /about/contact, /accessibility, /library, /study/complaintsprocedure.
-Cluster 1 rozsiany po 27 community — /maps, /about/visiting, /bookshop, /events.
-Cluster 3 rozsiany po 27 community — /research/data-science, /departments/a2z, strona główna.
+                <li><strong>Niezgoda:</strong> Cluster 6 rozsiany po 30 community — /aup, /research/rtp, /about/campus-journey/mode-of-travel/cycling/repair, /services/ris/impactinnovation/impact-academy/participatoryresearch, /helpdesk.
+Cluster 20 rozsiany po 26 community — /about/60/faq, /study/events/faqs, /bookshop, /events, /services/careers/contact.
+Cluster 15 rozsiany po 24 community — /departments/a2z, strona główna, /modernlanguages, /fac/sci, /research/data-science/warwick-data.
 </li>
-                <li><strong>Huby nawigacyjne:</strong> /privacy, /cookies, /accessibility, /copyright, /terms/general - stopień ~3000-3015, wszystkie cluster 4, ale community 0/3/3/6/3 - ten sam temat, różne community. Są to strony linkowane w stopce.</li>
+                <li><strong>Huby nawigacyjne:</strong> 15 stron o najwyższym stopniu w grafie rozkłada się na 9 różnych klastrów semantycznych, ale tylko 7 community. Np. strona główna, /news, /business, /research, /study — wszystkie community 0, ale różne klastry tematyczne (bo dotyczą różnych tematów mimo że linkowo należą do tego samego "rdzenia" serwisu); z kolei /privacy, /modernslavery, /cookies, /terms/general trafiają do tego samego klastra 6 (język formalno-prawny), ale do różnych community (bo są linkowane z różnych części serwisu, nie tylko ze stopki).</li>
             </ul>
-            
-            <div class="section-result"><b>Wynik:</b> zgodność treści i struktury linków rośnie z k (NMI 0.21→0.41, ARI 0.09→0.21), ale nawet przy k=15 pozostaje umiarkowana — tematy i linki pokrywają się częściowo.</div>
+
+            <p><strong>Zgodność NMI/ARI dla pełnego, rozszerzonego zakresu k:</strong></p>
+            <table class="custom-table">
+                <thead>
+                    <tr><th>k</th><th>3</th><th>5</th><th>7</th><th>10</th><th>15</th><th>20</th><th>25</th><th>30</th><th>37</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>NMI</td><td>0.214</td><td>0.271</td><td>0.318</td><td>0.381</td><td>0.408</td><td>0.424</td><td>0.432</td><td><strong>0.462</strong></td><td>0.459</td></tr>
+                    <tr><td>ARI</td><td>0.089</td><td>0.122</td><td>0.184</td><td>0.197</td><td>0.211</td><td>0.194</td><td>0.204</td><td><strong>0.226</strong></td><td>0.205</td></tr>
+                </tbody>
+            </table>
+
+            <div class="section-result"><b>Wynik:</b> zgodność rośnie z k, ale nie monotonicznie do końca — szczyt wypada przy <b>k=30</b> (NMI=0.462, ARI=0.226), a przy <b>k=37</b> (dokładnie tyle samo, co communities) zgodność <i>spada</i>. To sugeruje, że rozbieżność treść-vs-struktura nie wynika wyłącznie z różnej granulacji podziałów — gdyby tak było, zgodność powinna rosnąć aż do zrównania liczby grup. <b>Zastrzeżenie:</b> klastrowanie użyte tu do policzenia NMI/ARI pochodzi z własnej, jednorazowej implementacji k-means (bez wielokrotnego restartu) — a analogiczny spadek silhouette przy k=37 okazał się w Z3 dużo słabszy po przeliczeniu przez sklearn z restartami. Nie wiadomo więc jeszcze, czy ten spadek NMI/ARI jest realnym zjawiskiem, czy podobnym artefaktem pojedynczego losowego startu; wymagałoby to powtórzenia tego porównania na klastrowaniu ze sklearn.</div>
 
             <div class="doc-grid">
                 <div class="doc-item">
                     <h4>🧭 Orientacja</h4>
-                    <p class="tldr">NMI mierzy, ile mówi klaster semantyczny o community strukturalnej (i odwrotnie); znormalizowane do [0,1], więc porównuje 5 klastrów z 37 communities.</p>
+                    <p class="tldr">NMI mierzy, ile mówi klaster semantyczny o community strukturalnej (i odwrotnie); znormalizowane do [0,1], więc można nim porównywać podziały o dowolnie różnej liczbie grup — u nas od 3 do 37 klastrów z 37 communities.</p>
                     <details class="more"><summary>Rozwiń pełne wyjaśnienie AI</summary>
-                    <p>NMI (znormalizowane mutual information) mierzy, ile przynależność do klastra semantycznego mówi o przynależności do community strukturalnej, i odwrotnie — im mocniej pary (klaster, community) współwystępują częściej niż przy losowym podziale, tym wyższy wynik. Normalizacja sprowadza go do [0,1] niezależnie od liczby grup, więc można porównać 5 klastrów z 37 communities: 0 = brak związku, 1 = podziały identyczne.</p>
+                    <p>NMI (znormalizowane mutual information) mierzy, ile przynależność do klastra semantycznego mówi o przynależności do community strukturalnej, i odwrotnie — im mocniej pary (klaster, community) współwystępują częściej niż przy losowym podziale, tym wyższy wynik. Normalizacja sprowadza go do [0,1] niezależnie od liczby grup, więc można nim porównywać podziały o zupełnie różnej liczbie grup — u nas dowolne k (od 3 do 37 klastrów) z 37 communities: 0 = brak związku, 1 = podziały identyczne.</p>
                     </details>
                 </div>
                 <div class="doc-item" style="border-color: var(--accent); background: var(--accent-light);">
@@ -594,16 +637,16 @@ Cluster 3 rozsiany po 27 community — /research/data-science, /departments/a2z,
                 </div>
                 <div class="doc-item">
                     <h4>🔨 Budowa heatmapy</h4>
-                    <p class="tldr">Histogram 2D par (community, klaster) — po prostu zliczanie dokumentów w każdej kombinacji etykiet.</p>
+                    <p class="tldr">Histogram 2D par (community, klaster). Wcześniej liczony dla zahardkodowanego k=7 niezależnie od zakresu NMI/ARI — poprawione: k dobierane automatycznie jako argmax NMI (teraz k=30).</p>
                     <details class="more"><summary>Rozwiń szczegóły</summary>
-                    <p>Budowa jest bardzo prosta — parujemy etykiety każdego dokumentu: jego community c i jego klaster k. Następnie dla każdego dokumentu zwiększamy licznik w odpowiedniej komórce, czyli budujemy histogram 2D: ile dokumentów ma daną kombinację (community, klaster).</p>
+                    <p>Budowa jest bardzo prosta — parujemy etykiety każdego dokumentu: jego community c i jego klaster k. Następnie dla każdego dokumentu zwiększamy licznik w odpowiedniej komórce, czyli budujemy histogram 2D: ile dokumentów ma daną kombinację (community, klaster). Pierwotnie k do tego szczegółowego porównania było ustawione na sztywno jako stała `BEST_K_FOR_HEATMAP=7` w configu, niezależnie od tego, jaki zakres k testowała pętla NMI/ARI — więc rozszerzenie zakresu do 37 w ogóle nie zmieniało heatmapy. Poprawka: `best_k = max(agreement_results, key=lambda r: r["nmi"])["k"]` — k do szczegółowej analizy jest teraz liczone automatycznie jako to, które daje najwyższe NMI, więc zawsze jest spójne z wykresem NMI/ARI.</p>
                     </details>
                 </div>
                 <div class="doc-item">
                     <h4>✅ Walidacja</h4>
-                    <p class="tldr">NMI/ARI rosną z k, ale ARI jest systematycznie niższe — to skutek jednej dominującej, nieproporcjonalnie dużej community, którą ARI mocniej karze.</p>
+                    <p class="tldr">Zgodność rośnie do k=30, a przy k=37 spada — ale (patrz Z3) analogiczny spadek silhouette okazał się artefaktem jednorazowego uruchomienia k-means, więc ten wniosek wymaga jeszcze potwierdzenia na klastrowaniu ze sklearn.</p>
                     <details class="more"><summary>Rozwiń pełną walidację</summary>
-                    <p>Zgodność rośnie monotonicznie z k (NMI 0.21→0.41, ARI 0.09→0.21), bo przy większym k klastry są węższe i lepiej domykają się w pojedynczych community. ARI jest systematycznie niższe niż NMI, bo liczy zgodność parami dokumentów, a jedna nieproporcjonalnie duża community (~1864 węzłów) mocno je za to karze; NMI, oparte na entropii, jest mniej wrażliwe na ten nierówny rozkład rozmiarów i dla tego zbioru jest bardziej miarodajne. Wartości 0.2-0.4 są zresztą typowe dla serwisów webowych, gdzie nawigacja (stopka, menu) tworzy gęste linki niezależne od treści.</p>
+                    <p>Po rozszerzeniu zakresu k do 37 (czyli dokładnie tyle, ile jest communities) zgodność rośnie monotonicznie tylko do k=30 (NMI=0.462, ARI=0.226), po czym przy k=37 spada (NMI=0.459, ARI=0.205). Testowaliśmy w ten sposób hipotezę, czy niska zgodność wynika głównie z różnej granulacji podziałów (mniej klastrów semantycznych niż communities) — gdyby tak było, zgodność powinna rosnąć aż do zrównania liczby grup. Zamiast tego szczyt wypada wcześniej, a przy pełnym zrównaniu granulacji (k=37) zgodność się pogarsza, co wskazywałoby na przeklastrowywanie danych powyżej k≈30. <strong>Zastrzeżenie:</strong> etykiety klastrów użyte tu do NMI/ARI pochodzą z tej samej, jednorazowej implementacji k-means, dla której w Z3 spadek silhouette przy k=37 okazał się dużo słabszy (praktycznie zniknął) po przeliczeniu przez sklearn z wielokrotnym restartem. Możliwe więc, że część tego spadku NMI/ARI to podobny artefakt niestabilności pojedynczego losowego startu, a nie w pełni potwierdzone zjawisko przeklastrowywania — wymagałoby to powtórzenia porównania na etykietach ze sklearn. ARI pozostaje systematycznie niższe niż NMI na całym zakresie, bo liczy zgodność parami dokumentów, a jedna nieproporcjonalnie duża community (~1864 węzłów) mocno je za to karze; NMI, oparte na entropii, jest mniej wrażliwe na ten nierówny rozkład rozmiarów. Wartości 0.2-0.46 są zresztą typowe dla serwisów webowych, gdzie nawigacja (stopka, menu) tworzy gęste linki niezależne od treści.</p>
                     </details>
                 </div>
             </div>
@@ -628,8 +671,8 @@ Cluster 3 rozsiany po 27 community — /research/data-science, /departments/a2z,
         
         <section id="z7">
             <h2>Z7. Metoda dodatkowa (bonus)</h2>
-            <p><strong>Wybrana metoda:</strong> [np. pLSA / GMM / Naive Bayes]</p>
-            <div class="result-box">[Wyniki wybranej metody w porównaniu z baselinem (LSI + k-means)]</div>
+            <p><strong>Wybrana metoda:</strong> GMM (Gaussian Mixture Model)</p>
+            <div class="result-box">Porównanie z baselinem (LSI + k-means): k-means wypada lepiej na obu metrykach — patrz werdykt i pełna walidacja poniżej.</div>
             <div class="section-result"><b>Wynik:</b> k-means bije GMM zarówno pod względem silhouette, jak i zgodności ze strukturą grafu (NMI, ARI) — przestrzeń LSI jest bardziej separowalna niż nakładająca się.</div>
 
             <div class="doc-grid">
@@ -657,12 +700,13 @@ Cluster 3 rozsiany po 27 community — /research/data-science, /departments/a2z,
                 <li>Brak centralnego config - parametry są rozrzucone po plikach:
 MIN_DF=5, MAX_DF_RATIO=0.95 w z1_tdm.py
 DELAY=0.5, TIMEOUT=10 w fetch_pages.py
-KS = [3, 5, 7, 10, 15] w z3_k_means.py
+KS = [3, 5, 7, 10, 15, 20, 25, 30, 37] w config.py (rozszerzone z [3,5,7,10,15] po odkryciu, że silhouette rosło monotonicznie do końca pierwotnej listy)
 N_COMPONENTS=200 w z2_truncated_svd.py
 
 Jeden plik config.py wyeliminowałby potrzebę szukania, gdzie zmienić k.</li>
                 <li>main.py nic nie robi - wczytuje graf i na tym kończy. Albo powinien orchestrować cały pipeline, albo w ogóle go nie być.</li>
                 <li>z5_comparison.py to 369 linii - robi za dużo: oblicza metryki (NMI, ARI), buduje macierz pomyłek, generuje wykresy, analizuje case studies. Rozsądny podział to np. metrics.py + comparison_plots.py.</li>
+                <li>W z5_comparison.py k do szczegółowego porównania (heatmapa, case studies) było zahardkodowane jako stała `BEST_K_FOR_HEATMAP=7`, niezależnie od zakresu testowanego w pętli NMI/ARI — więc rozszerzenie listy KS w ogóle nie wpływało na heatmapę. Poprawiono na automatyczny wybór `k` jako argmax NMI, spójny z resztą analizy.</li>
             </ol>
             <p>Odrzucone usprawnienia:</p>
             <ol style="margin-left: 2rem; color: var(--text-muted); margin-bottom: 1.5rem;">

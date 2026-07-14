@@ -16,7 +16,7 @@ SVD_N_COMPONENTS = 200
 SVD_VARIANCE_KS = [10, 20, 50, 100, 200]
 
 # K-means
-KMEANS_KS = [3, 5, 7, 10, 15]
+KMEANS_KS = [3, 5, 7, 10, 15, 20, 25, 30, 37]
 KMEANS_RANDOM_STATE = 42
 
 # Comparison (z5)

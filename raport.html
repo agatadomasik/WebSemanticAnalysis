@@ -477,6 +477,30 @@
                 <li>Procent elementów niezerowych (sparsity): <strong>1.1%</strong></li>
             </ul>
             
+            <div class="doc-grid">
+                <div class="doc-item">
+                    <h4>🧭 Orientacja</h4>
+                    <p class="tldr">Stemming ujednolica formy słów, stop words odfiltrowują szum, próg 50 tokenów odrzuca puste strony, a TF-IDF waży termy wg częstości i rzadkości.</p>
+                    <details class="more"><summary>Rozwiń pełne wyjaśnienie AI</summary>
+                    <p>Stemming sprowadza słowa do wspólnego rdzenia, żeby różne formy tego samego słowa liczyły się jako jedno. Stop words usuwają słowa tak częste, że nie niosą informacji — bez tego zdominowałyby macierz. Próg min. 50 tokenów po usunięciu HTML i stop words odsiewa strony typu "404" czy samą nawigację. TF-IDF waży termy: TF = jak często słowo występuje w danym dokumencie, IDF = jak rzadkie jest ono w całym zbiorze.</p>
+                    </details>
+                </div>
+                <div class="doc-item">
+                    <h4>🔨 Budowa</h4>
+                    <p class="tldr">Pipeline: crawler.py → preprocessing.py → tdm.py. AI dobrało uczciwy User-Agent crawlera i stop-listy dopasowane do serwisu.</p>
+                    <details class="more"><summary>Rozwiń szczegóły budowy</summary>
+                    <p>Pipeline: crawler.py (pobiera strony z graph.json), preprocessing.py (czyści HTML), tdm.py (buduje macierz TF-IDF). AI zaproponowało User-Agent "Mozilla/5.0 (compatible; research-crawler/1.0)" — kompromis między przepuszczalnością przez serwery a uczciwym oznaczeniem crawlera. Zasugerowało też stop-listę tylko angielską (strona uczelni jest w 100% po angielsku) plus dodatkowe stopwords specyficzne dla serwisu, np. "cookies", "privacy" ze stopki.</p>
+                    </details>
+                </div>
+                <div class="doc-item full-width">
+                    <h4>✅ Walidacja</h4>
+                    <p class="tldr">98.9% macierzy jest zerowe — zgodnie z oczekiwaniami. Identyczny IDF dla top 20 termów wyjaśniony progiem MIN_DF=5, a nie błędem.</p>
+                    <details class="more"><summary>Rozwiń pełną walidację</summary>
+                    <p>98.9% zerowych elementów — zgodne z oczekiwaniami, żaden dokument nie zawiera całego słownika. Wszystkie top-20 termów mają identyczny IDF=6.2577, bo wszystkie wystąpiły w dokładnie 5 dokumentach (próg MIN_DF=5): log(2610/5)=6.2577 — to nie błąd, tylko alfabetyczny przypadek (słowa na "a"). Znaleziono też śmieciowe termy: fals (z atrybutów HTML) i chat (z widgetu) — dodane do stop words. "tag" i "open" przetrwały mimo dodania do stop words, bo filtrowanie działo się przed stemmingiem — poprawka: filtrować stop words po stemmingu.</p>
+                    </details>
+                </div>
+            </div>
+            
             <div class="result-box">
                 <table class="custom-table">
                     <thead>
@@ -512,50 +536,10 @@
                     </tbody>
                 </table>
             </div>
-            
-            <div class="doc-grid">
-                <div class="doc-item">
-                    <h4>🧭 Orientacja</h4>
-                    <p class="tldr">Stemming ujednolica formy słów, stop words odfiltrowują szum, próg 50 tokenów odrzuca puste strony, a TF-IDF waży termy wg częstości i rzadkości.</p>
-                    <details class="more"><summary>Rozwiń pełne wyjaśnienie AI</summary>
-                    <p>Stemming sprowadza słowa do wspólnego rdzenia, żeby różne formy tego samego słowa liczyły się jako jedno. Stop words usuwają słowa tak częste, że nie niosą informacji — bez tego zdominowałyby macierz. Próg min. 50 tokenów po usunięciu HTML i stop words odsiewa strony typu "404" czy samą nawigację. TF-IDF waży termy: TF = jak często słowo występuje w danym dokumencie, IDF = jak rzadkie jest ono w całym zbiorze.</p>
-                    </details>
-                </div>
-                <div class="doc-item">
-                    <h4>🔨 Budowa</h4>
-                    <p class="tldr">Pipeline: crawler.py → preprocessing.py → tdm.py. AI dobrało uczciwy User-Agent crawlera i stop-listy dopasowane do serwisu.</p>
-                    <details class="more"><summary>Rozwiń szczegóły budowy</summary>
-                    <p>Pipeline: crawler.py (pobiera strony z graph.json), preprocessing.py (czyści HTML), tdm.py (buduje macierz TF-IDF). AI zaproponowało User-Agent "Mozilla/5.0 (compatible; research-crawler/1.0)" — kompromis między przepuszczalnością przez serwery a uczciwym oznaczeniem crawlera. Zasugerowało też stop-listę tylko angielską (strona uczelni jest w 100% po angielsku) plus dodatkowe stopwords specyficzne dla serwisu, np. "cookies", "privacy" ze stopki.</p>
-                    </details>
-                </div>
-                <div class="doc-item full-width">
-                    <h4>✅ Walidacja</h4>
-                    <p class="tldr">98.9% macierzy jest zerowe — zgodnie z oczekiwaniami. Identyczny IDF dla top 20 termów wyjaśniony progiem MIN_DF=5, a nie błędem.</p>
-                    <details class="more"><summary>Rozwiń pełną walidację</summary>
-                    <p>98.9% zerowych elementów — zgodne z oczekiwaniami, żaden dokument nie zawiera całego słownika. Wszystkie top-20 termów mają identyczny IDF=6.2577, bo wszystkie wystąpiły w dokładnie 5 dokumentach (próg MIN_DF=5): log(2610/5)=6.2577 — to nie błąd, tylko alfabetyczny przypadek (słowa na "a"). Znaleziono też śmieciowe termy: fals (z atrybutów HTML) i chat (z widgetu) — dodane do stop words. "tag" i "open" przetrwały mimo dodania do stop words, bo filtrowanie działo się przed stemmingiem — poprawka: filtrować stop words po stemmingu.</p>
-                    </details>
-                </div>
-            </div>
         </section>
         
         <section id="z2">
             <h2>Z2. LSI — redukcja wymiaru (SVD)</h2>
-            
-            <div class="result-box">
-                <div class="image-row">
-                    <img src="reports/z2_scree_plot.png" alt="Scree plot LSI">
-                    <img src="reports/z2_lsi_documents.png" alt="Wizualizacja dokumentów LSI">
-                </div>
-                Wykres wartości singularnych (scree plot) oraz Wizualizacja 2D w przestrzeni LSI
-            </div>
-            
-            <p>Zachowana wariancja dla testowanych <i>k</i>:</p>
-            <table class="custom-table">
-                <tr><th>k</th><th>10</th><th>20</th><th>50</th><th>100</th><th>200</th></tr>
-                <tr><td>Frakcja wariancji</td><td>57.58%</td><td>65.64%</td><td>75.55%</td><td>82.68%</td><td>88.73%</td></tr>
-            </table>
-
-            <div class="section-result"><b>Wynik:</b> scree plot pokazuje wyraźny „łokieć" przy k≈15–20 — od tego miejsca kolejne wymiary dokładają już tylko marginalną wariancję.</div>
             
             <div class="doc-grid">
                 <div class="doc-item">
@@ -580,11 +564,52 @@
                     </details>
                 </div>
             </div>
+            <div class="result-box">
+                <div class="image-row">
+                    <img src="reports/z2_scree_plot.png" alt="Scree plot LSI">
+                    <img src="reports/z2_lsi_documents.png" alt="Wizualizacja dokumentów LSI">
+                </div>
+                Wykres wartości singularnych (scree plot) oraz Wizualizacja 2D w przestrzeni LSI
+            </div>
+            
+            <p>Zachowana wariancja dla testowanych <i>k</i>:</p>
+            <table class="custom-table">
+                <tr><th>k</th><th>10</th><th>20</th><th>50</th><th>100</th><th>200</th></tr>
+                <tr><td>Frakcja wariancji</td><td>57.58%</td><td>65.64%</td><td>75.55%</td><td>82.68%</td><td>88.73%</td></tr>
+            </table>
+
+            <div class="section-result"><b>Wynik:</b> scree plot pokazuje wyraźny „łokieć" przy k≈15–20 — od tego miejsca kolejne wymiary dokładają już tylko marginalną wariancję.</div>
+            
         </section>
         
         <section id="z3">
             <h2>⚡ Z3. Grupowanie semantyczne — k-means w przestrzeni LSI</h2>
             
+            <div class="doc-grid">
+                <div class="doc-item">
+                    <h4>🧭 Orientacja</h4>
+                    <p class="tldr">k-means uruchomiony na znormalizowanych wektorach LSI, co w praktyce daje efekt zbliżony do spherical k-means — lepszy dla danych tekstowych.</p>
+                    <details class="more"><summary>Rozwiń pełne wyjaśnienie AI</summary>
+                    <p>k-means uruchomiony na znormalizowanych wektorach LSI, bo wtedy odległość euklidesowa staje się równoważna podobieństwu cosinusowemu — efekt zbliżony do spherical k-means, zalecanego dla danych tekstowych. Prawdziwy spherical k-means dodatkowo normalizuje centroidy po każdej iteracji i liczy przypisania wprost przez cosine similarity.</p>
+                    </details>
+                </div>
+                <div class="doc-item" style="border-color: var(--accent); background: var(--accent-light);">
+                    <h4>⚡ 🔨 Budowa (Algorytm Rdzeniowy!)</h4>
+                    <p class="tldr">Własna implementacja k-means i WCSS (wymagane zadaniem) — losowe centroidy, przypisanie do najbliższego, aktualizacja średniej, reinicjalizacja pustych klastrów.</p>
+                    <details class="more"><summary>Rozwiń kroki algorytmu</summary>
+                    <p>Sami zaimplementowaliśmy rdzeń algorytmu: losowe centroidy startowe → pętla do zbieżności (przypisz każdy dokument do najbliższego centroidu euklidesowo, przesuń centroid do średniej klastra) → WCSS jako suma kwadratów odległości w klastrze. AI doradziło wektoryzację przez numpy (znacznie krótszy kod) i reinicjalizację centroidu przy pustym klastrze.</p>
+                    </details>
+                </div>
+                <div class="doc-item full-width">
+                    <h4>✅ Walidacja</h4>
+                    <p class="tldr">sklearn, dopiero co przeliczony na pełnym zakresie do k=37, niezależnie potwierdza k=30 jako najlepsze. Przy wyższych k sklearn systematycznie daje wyższy silhouette niż własna implementacja — i, co ważne, w wersji sklearn spadek przy k=37 jest znikomy, w przeciwieństwie do nieco wyraźniejszego spadku we własnej implementacji.</p>
+                    <details class="more"><summary>Rozwiń pełną walidację</summary>
+                    <p>Po odkomentowaniu wywołania sklearn i przeliczeniu go na pełnym, rozszerzonym zakresie (k=3...37) sklearn niezależnie wybrał <strong>Best k = 30</strong> — dokładnie to samo, co wcześniej wskazała własna implementacja. To mocne potwierdzenie: dwie różne implementacje k-means zgadzają się co do najlepszego k.</p>
+                    <p>WCSS zgadza się bardzo dobrze na całym zakresie (różnice 0-3.4%, sklearn systematycznie odrobinę niższy — spodziewane, bo `n_init=10` daje mu więcej szans na trafienie lepszego rozwiązania). Silhouette natomiast rozjeżdża się bardziej niż na wąskim zakresie: przy wyższych k (20, 25, 30, 37) sklearn daje wyraźnie wyższe wartości niż własna implementacja (różnice 8-14%, nie tylko przy k=7 jak wcześniej). To sugeruje, że problem pojedynczego losowego startu (bez wielokrotnych prób jak w sklearn) staje się bardziej dotkliwy przy większej liczbie klastrów — więcej klastrów to więcej okazji, żeby jeden zły start zepsuł wynik.</p>
+                    <p><strong>Ważna nowa obserwacja:</strong> spadek silhouette przy k=37 (który we własnej implementacji wyglądał na wyraźny sygnał "przeklastrowania": 0.186→0.176, spadek o 4.9%) w wersji sklearn jest praktycznie niezauważalny (0.2005→0.2004, spadek o 0.05% — statystycznie nieodróżnialne). Oznacza to, że wcześniejszy wniosek "silhouette realnie spada przy k=37" był częściowo artefaktem jednorazowego losowego startu we własnej implementacji, a nie w pełni potwierdzonym zjawiskiem. Sklearn sugeruje raczej, że jakość klastrowania <em>płaskoszczytuje</em> gdzieś w okolicach k=30-37, niż że k=37 jest wyraźnie gorsze. Wniosek "k=30 to najlepszy wybór" pozostaje trafny (oba potwierdzają to samo najlepsze k), ale silniejsza wersja wniosku ("k=37 jest gorsze, bo model się przeklastrowuje") wymaga ostrożniejszego sformułowania — dobrym krokiem na przyszłość byłoby przeliczenie też porównania NMI/ARI z Z5 na klastrowaniu ze sklearn zamiast własnej implementacji, żeby sprawdzić, czy tamten spadek przy k=37 również przetrwa czy okaże się podobnym artefaktem.</p>
+                    </details>
+                </div>
+            </div>
             <div class="result-box">
                 <div style="display: block; text-align: center; margin: 1.5rem 0; background: var(--bg-card); padding: 1.5rem; border: 1px solid var(--border); border-radius: var(--radius);">
                     
@@ -717,42 +742,10 @@
             
             <div class="section-result"><b>Wynik:</b> po rozszerzeniu testowanego zakresu z [3,5,7,10,15] do [3,5,7,10,15,20,25,30,37] silhouette rośnie aż do <b>k=30</b> (0.186 własna implementacja / 0.201 sklearn) — <b>k=30 jako najlepsze potwierdzają obie implementacje niezależnie</b>. Przy k=37 własna implementacja pokazuje niewielki spadek (0.176), sklearn (z wielokrotnym restartem) pokazuje w tym miejscu bardzo podobne wyniki (0.2004 ≈ 0.2005) — więc k=15 na pewno nie było prawdziwym optimum, ale to, czy k=37 jest realnie *gorsze* od k=30, czy tylko z nim zrównane, wymaga ostrożniejszego sformułowania.</div>
 
-            <div class="doc-grid">
-                <div class="doc-item">
-                    <h4>🧭 Orientacja</h4>
-                    <p class="tldr">k-means uruchomiony na znormalizowanych wektorach LSI, co w praktyce daje efekt zbliżony do spherical k-means — lepszy dla danych tekstowych.</p>
-                    <details class="more"><summary>Rozwiń pełne wyjaśnienie AI</summary>
-                    <p>k-means uruchomiony na znormalizowanych wektorach LSI, bo wtedy odległość euklidesowa staje się równoważna podobieństwu cosinusowemu — efekt zbliżony do spherical k-means, zalecanego dla danych tekstowych. Prawdziwy spherical k-means dodatkowo normalizuje centroidy po każdej iteracji i liczy przypisania wprost przez cosine similarity.</p>
-                    </details>
-                </div>
-                <div class="doc-item" style="border-color: var(--accent); background: var(--accent-light);">
-                    <h4>⚡ 🔨 Budowa (Algorytm Rdzeniowy!)</h4>
-                    <p class="tldr">Własna implementacja k-means i WCSS (wymagane zadaniem) — losowe centroidy, przypisanie do najbliższego, aktualizacja średniej, reinicjalizacja pustych klastrów.</p>
-                    <details class="more"><summary>Rozwiń kroki algorytmu</summary>
-                    <p>Sami zaimplementowaliśmy rdzeń algorytmu: losowe centroidy startowe → pętla do zbieżności (przypisz każdy dokument do najbliższego centroidu euklidesowo, przesuń centroid do średniej klastra) → WCSS jako suma kwadratów odległości w klastrze. AI doradziło wektoryzację przez numpy (znacznie krótszy kod) i reinicjalizację centroidu przy pustym klastrze.</p>
-                    </details>
-                </div>
-                <div class="doc-item full-width">
-                    <h4>✅ Walidacja</h4>
-                    <p class="tldr">sklearn, dopiero co przeliczony na pełnym zakresie do k=37, niezależnie potwierdza k=30 jako najlepsze. Przy wyższych k sklearn systematycznie daje wyższy silhouette niż własna implementacja — i, co ważne, w wersji sklearn spadek przy k=37 jest znikomy, w przeciwieństwie do nieco wyraźniejszego spadku we własnej implementacji.</p>
-                    <details class="more"><summary>Rozwiń pełną walidację</summary>
-                    <p>Po odkomentowaniu wywołania sklearn i przeliczeniu go na pełnym, rozszerzonym zakresie (k=3...37) sklearn niezależnie wybrał <strong>Best k = 30</strong> — dokładnie to samo, co wcześniej wskazała własna implementacja. To mocne potwierdzenie: dwie różne implementacje k-means zgadzają się co do najlepszego k.</p>
-                    <p>WCSS zgadza się bardzo dobrze na całym zakresie (różnice 0-3.4%, sklearn systematycznie odrobinę niższy — spodziewane, bo `n_init=10` daje mu więcej szans na trafienie lepszego rozwiązania). Silhouette natomiast rozjeżdża się bardziej niż na wąskim zakresie: przy wyższych k (20, 25, 30, 37) sklearn daje wyraźnie wyższe wartości niż własna implementacja (różnice 8-14%, nie tylko przy k=7 jak wcześniej). To sugeruje, że problem pojedynczego losowego startu (bez wielokrotnych prób jak w sklearn) staje się bardziej dotkliwy przy większej liczbie klastrów — więcej klastrów to więcej okazji, żeby jeden zły start zepsuł wynik.</p>
-                    <p><strong>Ważna nowa obserwacja:</strong> spadek silhouette przy k=37 (który we własnej implementacji wyglądał na wyraźny sygnał "przeklastrowania": 0.186→0.176, spadek o 4.9%) w wersji sklearn jest praktycznie niezauważalny (0.2005→0.2004, spadek o 0.05% — statystycznie nieodróżnialne). Oznacza to, że wcześniejszy wniosek "silhouette realnie spada przy k=37" był częściowo artefaktem jednorazowego losowego startu we własnej implementacji, a nie w pełni potwierdzonym zjawiskiem. Sklearn sugeruje raczej, że jakość klastrowania <em>płaskoszczytuje</em> gdzieś w okolicach k=30-37, niż że k=37 jest wyraźnie gorsze. Wniosek "k=30 to najlepszy wybór" pozostaje trafny (oba potwierdzają to samo najlepsze k), ale silniejsza wersja wniosku ("k=37 jest gorsze, bo model się przeklastrowuje") wymaga ostrożniejszego sformułowania — dobrym krokiem na przyszłość byłoby przeliczenie też porównania NMI/ARI z Z5 na klastrowaniu ze sklearn zamiast własnej implementacji, żeby sprawdzić, czy tamten spadek przy k=37 również przetrwa czy okaże się podobnym artefaktem.</p>
-                    </details>
-                </div>
-            </div>
         </section>
         
         <section id="z4">
             <h2>Z4. Grupowanie strukturalne — community detection</h2>
-            <p><strong>Użyty algorytm:</strong> Louvain | <strong>Liczba communities:</strong> 37 | <strong>Modularity Q:</strong> 0.61</p>
-            
-            <div class="result-box">
-                <img src="reports/z4_community_sizes.png" style="padding: 0 8rem; width: 100%; border-radius: 8px;">
-                [Histogram rozmiarów communities oraz opis Top-3 największych grup]
-            </div>
-            
             <div class="doc-grid">
                 <div class="doc-item">
                     <h4>🧭 Orientacja</h4>
@@ -776,17 +769,47 @@
                     </details>
                 </div>
             </div>
+            <p><strong>Użyty algorytm:</strong> Louvain | <strong>Liczba communities:</strong> 37 | <strong>Modularity Q:</strong> 0.61</p>
+            
+            <div class="result-box">
+                <img src="reports/z4_community_sizes.png" style="padding: 0 8rem; width: 100%; border-radius: 8px;">
+                Histogram rozmiarów communities oraz opis Top-3 największych grup
+            </div>
+            
         </section>
         
         <section id="z5">
             <h2>⚡ Z5. Porównanie: semantyczne vs strukturalne</h2>
             
-            <div class="result-box">
-                <div class="image-row">
-                    <img src="reports/z5_confusion.png">
-                    <img src="reports/z5_agreement_vs_k.png">
+            <div class="doc-grid">
+                <div class="doc-item">
+                    <h4>🧭 Orientacja</h4>
+                    <p class="tldr">NMI mierzy, ile mówi klaster semantyczny o community strukturalnej (i odwrotnie); znormalizowane do [0,1], więc można nim porównywać podziały o dowolnie różnej liczbie grup — u nas od 3 do 37 klastrów z 37 communities.</p>
+                    <details class="more"><summary>Rozwiń pełne wyjaśnienie AI</summary>
+                    <p>NMI (znormalizowane mutual information) mierzy, ile przynależność do klastra semantycznego mówi o przynależności do community strukturalnej, i odwrotnie — im mocniej pary (klaster, community) współwystępują częściej niż przy losowym podziale, tym wyższy wynik. Normalizacja sprowadza go do [0,1] niezależnie od liczby grup, więc można nim porównywać podziały o zupełnie różnej liczbie grup — u nas dowolne k (od 3 do 37 klastrów) z 37 communities: 0 = brak związku, 1 = podziały identyczne.</p>
+                    </details>
                 </div>
-                Wykres NMI/ARI dla k od 3 do 37 oraz heatmapa macierzy konfuzji (communities vs klastry k-means) — heatmapa liczona teraz dla k=30 (poprzednio zahardkodowane k=7)
+                <div class="doc-item" style="border-color: var(--accent); background: var(--accent-light);">
+                    <h4>⚡ 🔨 Budowa NMI (Alg. Rdzeniowy!)</h4>
+                    <p class="tldr">NMI zaimplementowane samodzielnie wg wzoru (rozkłady, rozkład wspólny, mutual information, entropia) i zweryfikowane wobec sklearn.</p>
+                    <details class="more"><summary>Rozwiń kroki implementacji</summary>
+                    <p>Implementacja wg wzoru: prawdopodobieństwa klastrów i communities (liczność grupy / N) → rozkład wspólny (zliczenie par etykiet (klaster, community) dla każdego dokumentu) → mutual information I(U;V) jako suma po parach z porównaniem do rozkładu niezależnego → wynik = 2·I / (H_u + H_v), gdzie H to entropia podziałów. Zweryfikowane wobec sklearn.normalized_mutual_info_score.</p>
+                    </details>
+                </div>
+                <div class="doc-item">
+                    <h4>🔨 Budowa heatmapy</h4>
+                    <p class="tldr">Histogram 2D par (community, klaster). Wcześniej liczony dla zahardkodowanego k=7 niezależnie od zakresu NMI/ARI — poprawione: k dobierane automatycznie jako argmax NMI (teraz k=30).</p>
+                    <details class="more"><summary>Rozwiń szczegóły</summary>
+                    <p>Budowa jest bardzo prosta — parujemy etykiety każdego dokumentu: jego community c i jego klaster k. Następnie dla każdego dokumentu zwiększamy licznik w odpowiedniej komórce, czyli budujemy histogram 2D: ile dokumentów ma daną kombinację (community, klaster). Pierwotnie k do tego szczegółowego porównania było ustawione na sztywno jako stała `BEST_K_FOR_HEATMAP=7` w configu, niezależnie od tego, jaki zakres k testowała pętla NMI/ARI — więc rozszerzenie zakresu do 37 w ogóle nie zmieniało heatmapy. Poprawka: `best_k = max(agreement_results, key=lambda r: r["nmi"])["k"]` — k do szczegółowej analizy jest teraz liczone automatycznie jako to, które daje najwyższe NMI, więc zawsze jest spójne z wykresem NMI/ARI.</p>
+                    </details>
+                </div>
+                <div class="doc-item">
+                    <h4>✅ Walidacja</h4>
+                    <p class="tldr">Zgodność rośnie do k=30, a przy k=37 spada — ale (patrz Z3) analogiczny spadek silhouette okazał się artefaktem jednorazowego uruchomienia k-means, więc ten wniosek wymaga jeszcze potwierdzenia na klastrowaniu ze sklearn.</p>
+                    <details class="more"><summary>Rozwiń pełną walidację</summary>
+                    <p>Po rozszerzeniu zakresu k do 37 (czyli dokładnie tyle, ile jest communities) zgodność rośnie monotonicznie tylko do k=30 (NMI=0.462, ARI=0.226), po czym przy k=37 spada (NMI=0.459, ARI=0.205). Testowaliśmy w ten sposób hipotezę, czy niska zgodność wynika głównie z różnej granulacji podziałów (mniej klastrów semantycznych niż communities) — gdyby tak było, zgodność powinna rosnąć aż do zrównania liczby grup. Zamiast tego szczyt wypada wcześniej, a przy pełnym zrównaniu granulacji (k=37) zgodność się pogarsza, co wskazywałoby na przeklastrowywanie danych powyżej k≈30. <strong>Zastrzeżenie:</strong> etykiety klastrów użyte tu do NMI/ARI pochodzą z tej samej, jednorazowej implementacji k-means, dla której w Z3 spadek silhouette przy k=37 okazał się dużo słabszy (praktycznie zniknął) po przeliczeniu przez sklearn z wielokrotnym restartem. Możliwe więc, że część tego spadku NMI/ARI to podobny artefakt niestabilności pojedynczego losowego startu, a nie w pełni potwierdzone zjawisko przeklastrowywania — wymagałoby to powtórzenia porównania na etykietach ze sklearn. ARI pozostaje systematycznie niższe niż NMI na całym zakresie, bo liczy zgodność parami dokumentów, a jedna nieproporcjonalnie duża community (~1864 węzłów) mocno je za to karze; NMI, oparte na entropii, jest mniej wrażliwe na ten nierówny rozkład rozmiarów. Wartości 0.2-0.46 są zresztą typowe dla serwisów webowych, gdzie nawigacja (stopka, menu) tworzy gęste linki niezależne od treści.</p>
+                    </details>
+                </div>
             </div>
             
             <p><strong>Analiza przypadków (Huby i anomalie):</strong></p>
@@ -850,6 +873,13 @@
                 </li>
             </ul>
 
+            <div class="result-box">
+                <div class="image-row">
+                    <img src="reports/z5_confusion.png">
+                    <img src="reports/z5_agreement_vs_k.png">
+                </div>
+                Wykres NMI/ARI dla k od 3 do 37 oraz heatmapa macierzy konfuzji (communities vs klastry k-means) — heatmapa liczona teraz dla k=30 (poprzednio zahardkodowane k=7)
+            </div>
             <p><strong>Zgodność NMI/ARI dla pełnego, rozszerzonego zakresu k:</strong></p>
             <table class="custom-table">
                 <thead>
@@ -863,40 +893,19 @@
 
             <div class="section-result"><b>Wynik:</b> zgodność rośnie z k, ale nie monotonicznie do końca — szczyt wypada przy <b>k=30</b> (NMI=0.462, ARI=0.226), a przy <b>k=37</b> (dokładnie tyle samo, co communities) zgodność <i>spada</i>. To sugeruje, że rozbieżność treść-vs-struktura nie wynika wyłącznie z różnej granulacji podziałów — gdyby tak było, zgodność powinna rosnąć aż do zrównania liczby grup. <b>Zastrzeżenie:</b> klastrowanie użyte tu do policzenia NMI/ARI pochodzi z własnej, jednorazowej implementacji k-means (bez wielokrotnego restartu) — a analogiczny spadek silhouette przy k=37 okazał się w Z3 dużo słabszy po przeliczeniu przez sklearn z restartami. Nie wiadomo więc jeszcze, czy ten spadek NMI/ARI jest realnym zjawiskiem, czy podobnym artefaktem pojedynczego losowego startu; wymagałoby to powtórzenia tego porównania na klastrowaniu ze sklearn.</div>
 
-            <div class="doc-grid">
-                <div class="doc-item">
-                    <h4>🧭 Orientacja</h4>
-                    <p class="tldr">NMI mierzy, ile mówi klaster semantyczny o community strukturalnej (i odwrotnie); znormalizowane do [0,1], więc można nim porównywać podziały o dowolnie różnej liczbie grup — u nas od 3 do 37 klastrów z 37 communities.</p>
-                    <details class="more"><summary>Rozwiń pełne wyjaśnienie AI</summary>
-                    <p>NMI (znormalizowane mutual information) mierzy, ile przynależność do klastra semantycznego mówi o przynależności do community strukturalnej, i odwrotnie — im mocniej pary (klaster, community) współwystępują częściej niż przy losowym podziale, tym wyższy wynik. Normalizacja sprowadza go do [0,1] niezależnie od liczby grup, więc można nim porównywać podziały o zupełnie różnej liczbie grup — u nas dowolne k (od 3 do 37 klastrów) z 37 communities: 0 = brak związku, 1 = podziały identyczne.</p>
-                    </details>
-                </div>
-                <div class="doc-item" style="border-color: var(--accent); background: var(--accent-light);">
-                    <h4>⚡ 🔨 Budowa NMI (Alg. Rdzeniowy!)</h4>
-                    <p class="tldr">NMI zaimplementowane samodzielnie wg wzoru (rozkłady, rozkład wspólny, mutual information, entropia) i zweryfikowane wobec sklearn.</p>
-                    <details class="more"><summary>Rozwiń kroki implementacji</summary>
-                    <p>Implementacja wg wzoru: prawdopodobieństwa klastrów i communities (liczność grupy / N) → rozkład wspólny (zliczenie par etykiet (klaster, community) dla każdego dokumentu) → mutual information I(U;V) jako suma po parach z porównaniem do rozkładu niezależnego → wynik = 2·I / (H_u + H_v), gdzie H to entropia podziałów. Zweryfikowane wobec sklearn.normalized_mutual_info_score.</p>
-                    </details>
-                </div>
-                <div class="doc-item">
-                    <h4>🔨 Budowa heatmapy</h4>
-                    <p class="tldr">Histogram 2D par (community, klaster). Wcześniej liczony dla zahardkodowanego k=7 niezależnie od zakresu NMI/ARI — poprawione: k dobierane automatycznie jako argmax NMI (teraz k=30).</p>
-                    <details class="more"><summary>Rozwiń szczegóły</summary>
-                    <p>Budowa jest bardzo prosta — parujemy etykiety każdego dokumentu: jego community c i jego klaster k. Następnie dla każdego dokumentu zwiększamy licznik w odpowiedniej komórce, czyli budujemy histogram 2D: ile dokumentów ma daną kombinację (community, klaster). Pierwotnie k do tego szczegółowego porównania było ustawione na sztywno jako stała `BEST_K_FOR_HEATMAP=7` w configu, niezależnie od tego, jaki zakres k testowała pętla NMI/ARI — więc rozszerzenie zakresu do 37 w ogóle nie zmieniało heatmapy. Poprawka: `best_k = max(agreement_results, key=lambda r: r["nmi"])["k"]` — k do szczegółowej analizy jest teraz liczone automatycznie jako to, które daje najwyższe NMI, więc zawsze jest spójne z wykresem NMI/ARI.</p>
-                    </details>
-                </div>
-                <div class="doc-item">
-                    <h4>✅ Walidacja</h4>
-                    <p class="tldr">Zgodność rośnie do k=30, a przy k=37 spada — ale (patrz Z3) analogiczny spadek silhouette okazał się artefaktem jednorazowego uruchomienia k-means, więc ten wniosek wymaga jeszcze potwierdzenia na klastrowaniu ze sklearn.</p>
-                    <details class="more"><summary>Rozwiń pełną walidację</summary>
-                    <p>Po rozszerzeniu zakresu k do 37 (czyli dokładnie tyle, ile jest communities) zgodność rośnie monotonicznie tylko do k=30 (NMI=0.462, ARI=0.226), po czym przy k=37 spada (NMI=0.459, ARI=0.205). Testowaliśmy w ten sposób hipotezę, czy niska zgodność wynika głównie z różnej granulacji podziałów (mniej klastrów semantycznych niż communities) — gdyby tak było, zgodność powinna rosnąć aż do zrównania liczby grup. Zamiast tego szczyt wypada wcześniej, a przy pełnym zrównaniu granulacji (k=37) zgodność się pogarsza, co wskazywałoby na przeklastrowywanie danych powyżej k≈30. <strong>Zastrzeżenie:</strong> etykiety klastrów użyte tu do NMI/ARI pochodzą z tej samej, jednorazowej implementacji k-means, dla której w Z3 spadek silhouette przy k=37 okazał się dużo słabszy (praktycznie zniknął) po przeliczeniu przez sklearn z wielokrotnym restartem. Możliwe więc, że część tego spadku NMI/ARI to podobny artefakt niestabilności pojedynczego losowego startu, a nie w pełni potwierdzone zjawisko przeklastrowywania — wymagałoby to powtórzenia porównania na etykietach ze sklearn. ARI pozostaje systematycznie niższe niż NMI na całym zakresie, bo liczy zgodność parami dokumentów, a jedna nieproporcjonalnie duża community (~1864 węzłów) mocno je za to karze; NMI, oparte na entropii, jest mniej wrażliwe na ten nierówny rozkład rozmiarów. Wartości 0.2-0.46 są zresztą typowe dla serwisów webowych, gdzie nawigacja (stopka, menu) tworzy gęste linki niezależne od treści.</p>
-                    </details>
-                </div>
-            </div>
         </section>
         
         <section id="z6">
             <h2>Z6. Wizualizacja i podsumowanie</h2>
+            <div class="doc-grid">
+                <div class="doc-item" style="grid-column: span 2;">
+                    <h4>🔨 Budowa i ✅ Walidacja</h4>
+                    <p class="tldr">Grafy i chmury słów zbudowane w matplotlib/wordcloud, po usunięciu wierzchołków spoza TDM. Niektóre klastry semantyczne dobrze pokrywają się z community (np. 0.981 dla sekcji international), inne przenikają się z powodu płynnych granic tematów.</p>
+                    <details class="more"><summary>Rozwiń pełny opis</summary>
+                    <p>Grafiki w matplotlib i wordcloud. Wierzchołki spoza TDM usunięto — obniżały czytelność i tak nie podlegały analizie semantycznej. Na kolorowanych grafach część communities pokrywa się dobrze z klastrami semantycznymi (np. sekcja study/international/ — zgodność 0.981), ale inne klastry przenikają się z wieloma communities naraz, bo granice tematów są płynne (np. wokół terminu "student"). Wykres community pokazuje wyraźne, mocno powiązane podgrupy — typowe dla serwisów z podwitrynami dla poszczególnych jednostek administracyjnych.</p>
+                    </details>
+                </div>
+            </div>
             <div class="result-box">
                 <div class="comparison-container" id="z6-comparison">
                     
@@ -920,22 +929,29 @@
                     <img src="reports/z6_wordcloud_cluster_8.png">
                     <img src="reports/z6_wordcloud_cluster_9.png">
                 </div>
-                [Grafy NetworkX oraz Chmury Słów (Word Clouds)]
-            </div>
-            <div class="doc-grid">
-                <div class="doc-item" style="grid-column: span 2;">
-                    <h4>🔨 Budowa i ✅ Walidacja</h4>
-                    <p class="tldr">Grafy i chmury słów zbudowane w matplotlib/wordcloud, po usunięciu wierzchołków spoza TDM. Niektóre klastry semantyczne dobrze pokrywają się z community (np. 0.981 dla sekcji international), inne przenikają się z powodu płynnych granic tematów.</p>
-                    <details class="more"><summary>Rozwiń pełny opis</summary>
-                    <p>Grafiki w matplotlib i wordcloud. Wierzchołki spoza TDM usunięto — obniżały czytelność i tak nie podlegały analizie semantycznej. Na kolorowanych grafach część communities pokrywa się dobrze z klastrami semantycznymi (np. sekcja study/international/ — zgodność 0.981), ale inne klastry przenikają się z wieloma communities naraz, bo granice tematów są płynne (np. wokół terminu "student"). Wykres community pokazuje wyraźne, mocno powiązane podgrupy — typowe dla serwisów z podwitrynami dla poszczególnych jednostek administracyjnych.</p>
-                    </details>
-                </div>
+                Grafy NetworkX oraz Chmury Słów (Word Clouds)
             </div>
         </section>
         
         <section id="z7">
             <h2>Z7. Metoda dodatkowa (bonus)</h2>
             <p><strong>Wybrana metoda:</strong> GMM</p>
+            <div class="doc-grid">
+                <div class="doc-item">
+                    <h4>🧭 Orientacja</h4>
+                    <p class="tldr">Wybrano GMM: łatwe porównanie z k-means, prosta implementacja w Pythonie, przypisanie miękkie (prawdopodobieństwa) zamiast twardego.</p>
+                    <details class="more"><summary>Rozwiń pełne wyjaśnienie AI</summary>
+                    <p>Wybrano GMM (łatwy do porównania z k-means, prosty w implementacji). Każdy klaster to rozkład normalny, a punkt może należeć do wielu klastrów z różnym prawdopodobieństwem. Algorytm EM w każdej iteracji liczy prawdopodobieństwo przynależności punktu do klastra k, a potem aktualizuje średnie, kowariancje i wagi.</p>
+                    </details>
+                </div>
+                <div class="doc-item">
+                    <h4>✅ Walidacja</h4>
+                    <p class="tldr">k-means przewyższa GMM na obu metrykach — wskazuje to na twarde, dobrze rozdzielone granice tematów zamiast nakładających się rozkładów.</p>
+                    <details class="more"><summary>Rozwiń pełną walidację</summary>
+                    <p>k-means przewyższa GMM zarówno na silhouette, jak i na zgodności ze strukturą grafu (NMI, ARI). Wskazuje to, że przestrzeń LSI jest bardziej separowalna niż nakładająca się — struktura tematyczna serwisu jest bliższa twardym granicom niż mieszaninie rozkładów, bo LSI + TF-IDF już dobrze separuje klastry, więc GMM nie ma czego modelować.</p>
+                    </details>
+                </div>
+            </div>
             <div class="result-box">
                 <table class="custom-table">
                     <thead>
@@ -964,22 +980,6 @@
                 
                 <div class="highlight-box" style="margin-top: 1rem;">
                     <strong>Krótka interpretacja wyników:</strong> k-means bije GMM zarówno pod względem silhouette, jak i zgodności ze strukturą grafu (NMI, ARI) — przestrzeń LSI jest bardziej separowalna niż nakładająca się.
-                </div>
-            </div>
-            <div class="doc-grid">
-                <div class="doc-item">
-                    <h4>🧭 Orientacja</h4>
-                    <p class="tldr">Wybrano GMM: łatwe porównanie z k-means, prosta implementacja w Pythonie, przypisanie miękkie (prawdopodobieństwa) zamiast twardego.</p>
-                    <details class="more"><summary>Rozwiń pełne wyjaśnienie AI</summary>
-                    <p>Wybrano GMM (łatwy do porównania z k-means, prosty w implementacji). Każdy klaster to rozkład normalny, a punkt może należeć do wielu klastrów z różnym prawdopodobieństwem. Algorytm EM w każdej iteracji liczy prawdopodobieństwo przynależności punktu do klastra k, a potem aktualizuje średnie, kowariancje i wagi.</p>
-                    </details>
-                </div>
-                <div class="doc-item">
-                    <h4>✅ Walidacja</h4>
-                    <p class="tldr">k-means przewyższa GMM na obu metrykach — wskazuje to na twarde, dobrze rozdzielone granice tematów zamiast nakładających się rozkładów.</p>
-                    <details class="more"><summary>Rozwiń pełną walidację</summary>
-                    <p>k-means przewyższa GMM zarówno na silhouette, jak i na zgodności ze strukturą grafu (NMI, ARI). Wskazuje to, że przestrzeń LSI jest bardziej separowalna niż nakładająca się — struktura tematyczna serwisu jest bliższa twardym granicom niż mieszaninie rozkładów, bo LSI + TF-IDF już dobrze separuje klastry, więc GMM nie ma czego modelować.</p>
-                    </details>
                 </div>
             </div>
         </section>
